@@ -1,0 +1,78 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 站点后台 > 会员 > 列表
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-row class="el-tool-bar">
+        <el-col :span="6">
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+                <el-breadcrumb-item>{{breadcrumb.first_role_rule_name}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{breadcrumb.second_role_rule_name}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{breadcrumb.third_role_rule_name}}</el-breadcrumb-item>
+            </el-breadcrumb>
+        </el-col>
+        <el-col :span="12">
+            <el-form @submit.native.prevent>
+                <el-row :gutter="5">
+                    <el-col span="20">
+                        <el-input ref="search_keyword" size="mini" placeholder="请输入用户名、姓名、电话、邮箱、地址" maxlength="20" show-word-limit="true" clearable="true" v-model="search_default_data.keyword"></el-input>
+                    </el-col>
+                    <el-col span="4">
+                        {:search_data_button()}
+                    </el-col>
+                </el-row>
+            </el-form>
+        </el-col>
+        <el-col :span="6" class="right_align padding_right_10">
+            {:reload_data_button()}
+        </el-col>
+    </el-row>
+
+    <el-table ref="main_table" size="mini" border="true" stripe="true" highlight-current-row="true" cell-class-name="center_align" :max-height="table_max_height" @row-click="click_current_row">
+        <el-table-column label="ID" prop="id" width="50"></el-table-column>
+        <el-table-column label="用户名" prop="username"></el-table-column>
+        <el-table-column label="会员级别" prop="user_level.user_level_name"></el-table-column>
+        <el-table-column label="姓名" prop="username"></el-table-column>
+        <el-table-column label="电话" prop="tel"></el-table-column>
+        <el-table-column label="省市县">
+            <template slot-scope="scope">
+                <span v-if="scope.row.province_id > 0">{{scope.row.province.city_name}}</span><span v-if="scope.row.city_id > 0">{{scope.row.city.city_name}}</span><span v-if="scope.row.county_id > 0">{{scope.row.county.city_name}}</span>
+            </template>
+        </el-table-column>
+        <el-table-column label="详细地址" prop="address"></el-table-column>
+        <el-table-column label="注册时间" prop="create_time" width="150"></el-table-column>
+        <el-table-column label="审核" width="100">
+            <template slot-scope="scope">
+                {:site_update_is_pass_button()}
+            </template>
+        </el-table-column>
+        <el-table-column label="操作" width="180">
+            <template slot-scope="scope">
+                {:site_update_button(800, 550)}
+                {:site_delete_data_button()}
+            </template>
+        </el-table-column>
+    </el-table>
+
+    <div class="pc_table_footer_bar right_align">
+        {:page_bar()}
+    </div>
+</div>
+
+<script src="/static/renhe-ui/data/role_rule_data.js"></script>
+<script src="/static/renhe-ui/data/user_data.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                breadcrumb: role_rule_data.get_breadcrumb(),
+                main_list: user_data.get_site_any_page(),
+                search_default_data: user_data.get_search_default_data()
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

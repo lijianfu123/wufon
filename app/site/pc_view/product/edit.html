@@ -1,0 +1,131 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 站点后台 > 商品 > 添加、修改
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-form class="padding_20" label-width="100px" @submit.native.prevent>
+        <el-tabs v-model="tabs_active">
+            <el-tab-pane label="内容管理" name="first_tab">
+                <el-form-item label="所属分类">
+                    <el-select v-model="main_detail.first_product_class_id" @change="main_detail.second_product_class_id = 0">
+                        <el-option v-for="product_class in product_class_siter_pass_option" v-if="product_class.level === 1" :label="product_class.product_class_name" :value="product_class.id"></el-option>
+                    </el-select>
+                    <el-select v-model="main_detail.second_product_class_id">
+                        <el-option v-for="product_class in product_class_siter_pass_option" v-if="(product_class.id === 0) || ((product_class.level === 2) && (product_class.parent_id === main_detail.first_product_class_id))" :label="product_class.product_class_name" :value="product_class.id"></el-option>
+                    </el-select>
+                </el-form-item>
+                <!--
+                <el-form-item label="适用人群">
+                    <el-select v-model="main_detail.people_id">
+                        <el-option v-for="people in people_siter_pass_option" :label="people.people_name" :value="people.id"></el-option>
+                    </el-select>
+                </el-form-item>
+                -->
+                <el-form-item label="商品名称" :required="true">
+                    <el-input placeholder="请输入商品名称" maxlength="200" show-word-limit="true" clearable="true" v-model="main_detail.product_name"></el-input>
+                </el-form-item>
+
+                <el-form-item label="产品功能">
+                    <el-input placeholder="请输入产品功能" maxlength="2000" show-word-limit="true" clearable="true" v-model="main_detail.gong_neng"></el-input>
+                </el-form-item>
+                <el-form-item label="使用范围">
+                    <el-input placeholder="请输入使用范围" maxlength="2000" show-word-limit="true" clearable="true" v-model="main_detail.fan_wei"></el-input>
+                </el-form-item>
+                <el-form-item label="订货范例">
+                    <el-input placeholder="请输入订货范例" maxlength="2000" show-word-limit="true" clearable="true" v-model="main_detail.fan_li"></el-input>
+                </el-form-item>
+                <!--
+                <el-form-item label="商品编号">
+                    <el-input placeholder="请输入商品编号" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.product_code"></el-input>
+                </el-form-item>
+                <el-form-item label="重量（千克）">
+                    <el-input-number placeholder="请输入重量" precision="3" :min="0" v-model="main_detail.weight"></el-input-number>
+                </el-form-item>
+                <el-form-item label="市场价（元）">
+                    <el-input-number placeholder="请输入市场价" precision="2" :min="0" v-model="main_detail.mark_price"></el-input-number>
+                </el-form-item>
+                -->
+                <el-form-item label="缩略图">
+                    <el-col :span="2">
+                        <el-upload ref="upload_image" action="{:upload_url()}" accept="image/*" :show-file-list="false" :disabled="is_disabled_upload_button" :before-upload="before_upload" :on-success="upload_file()">
+                            <el-button type="success" class="el-icon-upload" :disabled="is_disabled_upload_button" :loading="is_loading_upload_button">点击上传</el-button>
+                        </el-upload>
+                    </el-col>
+                    <el-col :span="2">
+                        <el-image class="hand_cursor width_40 height_40" :src="main_detail.image" v-if="(main_detail.image !== undefined) && (main_detail.image !== '')" @click="show_image(main_detail.image)"></el-image>
+                    </el-col>
+                    <el-alert type="warning" title="请上传 jpg、gif、png（RGB 格式）图片，且文件的大小不超过 200K" show-icon="true" :closable="false">
+                        宽度：{{site_detail.product_image_width}}像素<span class="padding_left_20">高度：{{site_detail.product_image_height}}像素</span>
+                    </el-alert>
+                </el-form-item>
+                <el-form-item label="图组">
+                    <el-upload ref="upload_image_list_json" action="{:upload_url()}" accept="image/*" list-type="picture-card" limit="3" :file-list="main_detail.el_upload_image_list_json" :disabled="is_disabled_upload_button" :before-upload="before_upload" :on-success="upload_file_list()">
+                        <i class="el-icon-plus"></i>
+                    </el-upload>
+                    <el-alert type="warning" title="最多上传 3 张照片" show-icon="true" :closable="false">请上传 jpg、gif、png（RGB 格式）图片，且文件的大小不超过 200K</el-alert>
+                </el-form-item>
+                <el-form-item>
+                    <el-switch active-text="审核" v-model="main_detail.is_pass"></el-switch>
+                    <span class="padding_left_20">
+                        <el-switch active-text="推荐" v-model="main_detail.is_commend"></el-switch>
+                    </span>
+                </el-form-item>
+                <el-form-item>
+                    <el-tabs type="border-card" v-model="tabs_content_active">
+                        <el-tab-pane label="技术参数" name="first_content_tab">
+                            <textarea id="content" ref="editor" v-model="main_detail.content"></textarea>
+                        </el-tab-pane>
+                        <el-tab-pane label="产品选型" name="second_content_tab">
+                            <textarea id="xuan_xing" ref="editor_xuan_xing" v-model="main_detail.xuan_xing"></textarea>
+                        </el-tab-pane>
+                        <el-tab-pane label="外形尺寸" name="third_content_tab">
+                            <textarea id="chi_cun" ref="editor_chi_cun" v-model="main_detail.chi_cun"></textarea>
+                        </el-tab-pane>
+                        <el-tab-pane label="产品报价" name="fourth_content_tab">
+                            <textarea id="bao_jia" ref="editor_bao_jia" v-model="main_detail.bao_jia"></textarea>
+                        </el-tab-pane>
+                    </el-tabs>
+                </el-form-item>
+                <div class="height_50"></div>
+            </el-tab-pane>
+            <el-tab-pane label="SEO 设置" name="second_tab">
+                <el-form-item label="title">
+                    <el-input placeholder="请输入 title" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.title"></el-input>
+                    <el-alert type="warning" title="留空 为 ‘商品名称’" show-icon="true" :closable="false"></el-alert>
+                </el-form-item>
+                <el-form-item label="keywords">
+                    <el-input placeholder="请输入 keywords" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.keywords"></el-input>
+                </el-form-item>
+                <el-form-item label="description">
+                    <el-input placeholder="请输入 description" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.description"></el-input>
+                </el-form-item>
+            </el-tab-pane>
+        </el-tabs>
+
+        <div class="pc_bottom_button_bar">
+            {:close_button()}
+            {:site_save_data_button()}
+        </div>
+    </el-form>
+</div>
+
+<script src="/static/renhe-ui/data/site_data.js"></script>
+<script src="/static/renhe-ui/data/product_data.js"></script>
+<script src="/static/renhe-ui/data/product_class_data.js"></script>
+<script src="/static/renhe-ui/data/people_data.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                main_detail: product_data.get_site_any_detail('{$id}'),
+                people_siter_pass_option: people_data.get_site_pass_option(),
+                product_class_siter_pass_option: product_class_data.get_site_pass_option(),
+                site_detail: site_data.get_site_any_detail('{$siter_login_detail["site_id"]}')
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

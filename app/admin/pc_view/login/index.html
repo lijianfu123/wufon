@@ -1,0 +1,87 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 后台管理 > 登录
+-+--------------------------------------------------
+-->
+<style>
+    #app {
+        height: 100%;
+        padding-top: 100px;
+    }
+
+    form {
+        box-shadow: 1px 1px 10px 1px #cccccc;
+        padding: 10px 25px 10px 10px;
+        margin: auto;
+        width: 500px;
+        background: white;
+    }
+
+    h2 {
+        color: #1E9FFF;
+        font-weight: bold;
+        margin: 10px;
+        text-align: center;
+    }
+
+    ul {
+        margin: 0 0 20px 20px;
+    }
+
+    li {
+        padding: 5px;
+    }
+
+    button {
+        width: 100%;
+        background: black !important;
+        border: 1px solid black !important;
+    }
+</style>
+
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-form @submit.native.prevent>
+        <h2>后台管理-登录</h2>
+        <ul>
+            <li>
+                <el-input placeholder="请输入用户名" maxlength="20" show-word-limit="true" clearable="true" v-model="main_detail.username">
+                    <template slot="prepend">用户名：</template>
+                </el-input>
+            </li>
+            <li>
+                <el-input type="password" placeholder="请输入密码" maxlength="20" show-word-limit="true" clearable="true" v-model="main_detail.password">
+                    <template slot="prepend">密&nbsp;&nbsp;&nbsp;&nbsp;码：</template>
+                </el-input>
+            </li>
+            <li>
+                <el-row :gutter="10">
+                    <el-col :span="19">
+                        <el-input placeholder="请输入验证码" maxlength="10" show-word-limit="true" clearable="true" v-model="main_detail.captcha">
+                            <template slot="prepend">验证码：</template>
+                        </el-input>
+                    </el-col>
+                    <el-col :span="4">
+                        {:captcha_image()}
+                    </el-col>
+                </el-row>
+            </li>
+            <li>
+                <el-button type="primary" native-type="submit" :loading="is_loading_html" @click="admin_login()">登录</el-button>
+            </li>
+        </ul>
+    </el-form>
+</div>
+
+<script src="/static/renhe-ui/data/admin_data.js"></script>
+<script type="text/javascript">
+    let vue_param = {
+        data() {
+            return {
+                main_detail: admin_data.get_pass_detail()
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

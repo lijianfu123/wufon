@@ -1,0 +1,83 @@
+<!--
+-+--------------------------------------------------
+-| 手机端
+-| 会员中心 > 收货地址 > 列表
+-+--------------------------------------------------
+-->
+<div id="app">
+    <van-nav-bar ref="nav_bar" title="收货地址" left-arrow @click-left="back()"></van-nav-bar>
+
+    <van-list class="margin_bottom_5">
+        <van-cell icon="location-o">
+            <template slot="title">
+                <span class="custom-title">李先生 130xxxx8888</span>
+            </template>
+            <template slot="label">
+                <div>河北省邯郸市滨河世纪大厦 1504</div>
+            </template>
+        </van-cell>
+        <van-cell>
+            <template slot="title">
+                <van-row>
+                    <van-col span="8">
+                        <van-row>
+                            <van-col span="8" class="margin_top_2">
+                                <van-switch v-model="main_detail.is_default"></van-switch>
+                            </van-col>
+                            <van-col span="16"><span class="gray">设为默认</span></van-col>
+                        </van-row>
+                    </van-col>
+                    <van-col span="16" class="right_align">
+                        <van-button type="info" icon="edit" size="mini">修改</van-button>
+                        <van-button type="danger" icon="delete" size="mini">删除</van-button>
+                    </van-col>
+                </van-row>
+            </template>
+        </van-cell>
+    </van-list>
+
+    <van-list>
+        <van-cell icon="location-o">
+            <template slot="title">
+                <span class="custom-title">李先生 130xxxx8888</span>
+            </template>
+            <template slot="label">
+                <div>河北省邯郸市滨河世纪大厦 1504</div>
+            </template>
+        </van-cell>
+        <van-cell>
+            <template slot="title">
+                <van-row>
+                    <van-col span="8">
+                        <van-row>
+                            <van-col span="8" class="margin_top_2">
+                                <van-switch v-model="main_detail.is_default"></van-switch>
+                            </van-col>
+                            <van-col span="16"><span class="gray">设为默认</span></van-col>
+                        </van-row>
+                    </van-col>
+                    <van-col span="16" class="right_align">
+                        <van-button type="info" icon="edit" size="mini">修改</van-button>
+                        <van-button type="danger" icon="delete" size="mini">删除</van-button>
+                    </van-col>
+                </van-row>
+            </template>
+        </van-cell>
+    </van-list>
+
+    <div class="mobile_bottom_button_bar">
+        <van-button type="danger" icon="plus" size="small" block>添加地址</van-button>
+    </div>
+
+    {include file="address/edit"}
+</div>
+
+<script>
+    let vue_param = {
+        data() {
+            return {}
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

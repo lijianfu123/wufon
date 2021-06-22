@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{$main_detail['title']}</title>
+    <meta name="keywords" content="{$main_detail['keywords']}">
+    <meta name="description" content="{$main_detail['description']}">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+
+<!--     <script>
+        var STATIC_URL = "https://www.aupu.net/web/static/";
+        var GLOBAL_URL = "https://www.aupu.net/";
+        var UPLOAD_URL = "https://www.aupu.net/web/upload/";
+        var SITE_URL   = "https://www.aupu.net/";
+    </script> -->
+    <link rel="stylesheet" href="/app/index/pc_view/css/reset.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="/app/index/pc_view/css/style.min.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="/app/index/pc_view/css/iconfont.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="/app/index/pc_view/css/animate.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="/app/index/pc_view/css/swiper.css" type="text/css" media="screen" charset="utf-8">
+
+    <script src="/app/index/pc_view/js/jQuery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/app/index/pc_view/js/jquery.easing.1.3.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/app/index/pc_view/js/prefixfree.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/app/index/pc_view/js/html5.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/app/index/pc_view/js/wow.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/app/index/pc_view/js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <style>
+        /*分页栏*/
+        .page_bar {text-align: center; width: 100%;}
+            .page_bar table {margin: auto;}
+            .page_bar table td a {display: block; width: 30px; height: 30px; line-height: 30px; text-align: center; margin-right: 5px; border: 1px solid #05A25F; cursor: pointer;}
+            .page_bar table td a:hover {background: #05A25F; color: white;}
+            .page_bar table td .active {background: #05A25F; color: white;}
+
+        .nav-ul li {
+            position: relative;
+        }
+
+        /* 2020年3月30日 09:40:14 修改 */
+        .nav-ul li:nth-child(2):hover ul {
+            display: block;
+            flex: 0 0 99.3%;
+            margin-bottom: 30px;
+            margin-top: 15px;
+        }
+
+        .nav-ul li:nth-child(6) .hide-nav ul {
+            display: flex !important;
+            flex-wrap: wrap;
+        }
+
+        .nav-ul li:nth-child(6) .hide-nav ul h3 {
+            font-size: 16px;
+            margin-bottom: 18px;
+            margin-left: 21px;
+        }
+
+        .nav-ul li:nth-child(6):hover ul {
+            display: block;
+            flex: 0 0 99.3%;
+            margin-bottom: 30px;
+            margin-top: 15px;
+        }
+
+        .nav-ul li ul:nth-child(2) li,
+        .nav-ul li ul:nth-child(6) li {
+            font-size: 15px;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .nav-ul li:hover .hide-nav {
+            display: block !important;
+        }
+
+        .nav-ul li:nth-child(4):hover .hide-nav {
+            display: block !important;
+        }
+
+        .nav-ul li:nth-child(5):hover .hide-nav {
+            display: block !important;
+        }
+        /* 修改结束 */
+    </style>
+
+    <script>
+        /**
+         * 设置 导航
+         */
+        function set_nav(n) {
+            $('.nav-ul').find('a').eq(n).addClass('select');
+        }
+
+        /**
+         * 切换标签
+         * @param n
+         */
+        function set_tab(n) {
+            $('.switch_tab').find('li').removeClass('switchCheck');
+            $('.switch_tab').find('li').eq(n).addClass('switchCheck');
+
+            $('.tab_content').find('li').hide();
+            $('.tab_content').find('li').eq(n).show();
+        }
+    </script>
+</head>
+
+<body>
+{include file="header"}
+{__CONTENT__}
+{include file="footer"}
+</body>
+<script>
+$(function() {
+    var mySwiper = new Swiper('.banner_box .swiper-container', {
+        loop: true,
+        autoplay: 4000,
+        paginationClickable: true,
+        pagination: '.banner_box .swiper-pagination',
+        nextButton: '.banner_box .swiper-button-next',
+        prevButton: '.banner_box .swiper-button-prev',
+    })
+})
+</script>
+</html>

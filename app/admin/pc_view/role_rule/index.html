@@ -1,0 +1,73 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 后台管理 > 权限规则 > 列表
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-row class="el-tool-bar">
+        <el-col :span="6">
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+                <el-breadcrumb-item>{{breadcrumb.first_role_rule_name}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{breadcrumb.second_role_rule_name}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{breadcrumb.third_role_rule_name}}</el-breadcrumb-item>
+            </el-breadcrumb>
+        </el-col>
+        <el-col :span="18" class="right_align padding_right_10">
+            {:app_enum_type_insert_button(800, 520, $app_enum_type)}
+            {:app_enum_type_update_sort_button($app_enum_type)}
+            {:reload_data_button()}
+        </el-col>
+    </el-row>
+
+    <el-table ref="main_table" size="mini" border="true" stripe="true" highlight-current-row="true" row-key="id" :max-height="table_max_height" @row-click="click_current_row">
+        <el-table-column label="权限规则名称" prop="role_rule_name"></el-table-column>
+        <el-table-column label="ID" prop="id" width="50" class-name="center_align"></el-table-column>
+        <el-table-column label="第1层排序" width="100" class-name="center_align">
+            <template slot-scope="scope">
+                <div v-show="scope.row.level === 1">
+                    {:app_enum_type_sort_input($app_enum_type)}
+                </div>
+            </template>
+        </el-table-column>
+        <el-table-column label="第2层排序" width="100" class-name="center_align">
+            <template slot-scope="scope">
+                <div v-show="scope.row.level === 2">
+                    {:app_enum_type_sort_input($app_enum_type)}
+                </div>
+            </template>
+        </el-table-column>
+        <el-table-column label="第3层排序" width="100" class-name="center_align">
+            <template slot-scope="scope">
+                <div v-show="scope.row.level === 3">
+                    {:app_enum_type_sort_input($app_enum_type)}
+                </div>
+            </template>
+        </el-table-column>
+        <el-table-column label="审核" width="100" class-name="center_align">
+            <template slot-scope="scope">
+                {:app_enum_type_update_is_pass_button($app_enum_type)}
+            </template>
+        </el-table-column>
+        <el-table-column label="操作" width="180" class-name="center_align">
+            <template slot-scope="scope">
+                {:app_enum_type_update_button(800, 520, $app_enum_type)}
+                {:app_enum_type_delete_data_button($app_enum_type)}
+            </template>
+        </el-table-column>
+    </el-table>
+</div>
+
+<script src="/static/renhe-ui/data/role_rule_data.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                breadcrumb: role_rule_data.get_breadcrumb(),
+                main_list: role_rule_data.get_{$app_enum_type}_app_any_tree_list()
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

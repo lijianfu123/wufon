@@ -1,0 +1,50 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 站点后台 > 颜色 > 添加、修改
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-form class="padding_20" label-width="100px" @submit.native.prevent>
+        <el-form-item label="颜色名称" :required="true">
+            <el-input placeholder="请输入颜色名称" maxlength="20" show-word-limit="true" clearable="true"
+                      v-model="main_detail.color_name"></el-input>
+        </el-form-item>
+        <el-form-item label="色值">
+            <el-col :span="10">
+                <el-input placeholder="请输入色值" maxlength="20" show-word-limit="true" clearable="true"
+                          v-model="main_detail.color_value"></el-input>
+            </el-col>
+            <el-col :span="4" class="padding_left_5">
+                <el-color-picker v-model="main_detail.color_value"></el-color-picker>
+            </el-col>
+            <el-col :span="10">
+                <el-alert type="warning" title="点击调色板选择颜色" show-icon="true" :closable="false"></el-alert>
+            </el-col>
+        </el-form-item>
+        <el-form-item label="排序" :required="true">
+            <el-input-number placeholder="排序值" precision="0" :min="1" v-model="main_detail.sort"></el-input-number>
+        </el-form-item>
+        <el-form-item>
+            <el-switch active-text="审核" v-model="main_detail.is_pass"></el-switch>
+        </el-form-item>
+
+        <div class="pc_bottom_button_bar">
+            {:close_button()}
+            {:site_save_data_button()}
+        </div>
+    </el-form>
+</div>
+
+<script src="/static/renhe-ui/data/color_data.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                main_detail: color_data.get_site_any_detail('{$id}')
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

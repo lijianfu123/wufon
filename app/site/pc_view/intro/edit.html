@@ -1,0 +1,108 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 站点后台 > 单页面 > 添加、修改
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-form class="padding_20" label-width="100px" @submit.native.prevent>
+        <el-tabs v-model="tabs_active">
+            <el-tab-pane label="内容管理" name="first_tab">
+                <el-form-item label="单页面名称" :required="true">
+                    <el-input placeholder="请输入单页面名称" maxlength="20" show-word-limit="true" clearable="true" v-model="main_detail.intro_name"></el-input>
+                </el-form-item>
+                <el-form-item label="图片">
+                    <el-col :span="6">
+                        <el-upload ref="upload_image" action="{:upload_url()}" accept="image/*" :show-file-list="false" :disabled="is_disabled_upload_button" :before-upload="before_upload" :on-success="upload_file()">
+                            <el-button type="success" class="el-icon-upload" :disabled="is_disabled_upload_button" :loading="is_loading_upload_button">点击上传</el-button>
+                        </el-upload>
+                    </el-col>
+                    <el-col :span="2">
+                        <el-image class="hand_cursor width_40 height_40" :src="main_detail.image" v-if="(main_detail.image !== undefined) && (main_detail.image !== '')" @click="show_image(main_detail.image)"></el-image>
+                    </el-col>
+                    <el-alert type="warning" title="请上传 jpg、gif、png（RGB 格式）图片，且文件的大小不超过 200K" show-icon="true" :closable="false">
+                        宽度：{{site_detail.intro_image_width}}像素<span class="padding_left_20">高度：{{site_detail.intro_image_height}}像素</span>
+                    </el-alert>
+                </el-form-item>
+
+                {if condition="$id == 1"}
+                <el-form-item label="视频">
+                    <el-col :span="19">
+                        <el-input placeholder="请输入文件视频" maxlength="200" show-word-limit="true" clearable="true" v-model="main_detail.video"></el-input>
+                    </el-col>
+                    <el-col :span="4">
+                        <el-upload ref="upload_video" action="{:upload_url()}" accept="*" :show-file-list="false" :disabled="is_disabled_upload_button" :before-upload="before_upload" :on-success="upload_file('video')">
+                            <el-button type="success" class="el-icon-upload" :disabled="is_disabled_upload_button" :loading="is_loading_upload_button">点击上传</el-button>
+                        </el-upload>
+                    </el-col>
+                    <!--<el-alert type="warning" title="请上传 jpg、gif、png（RGB 格式）图片，且文件的大小不超过 200K" show-icon="true" :closable="false"></el-alert>-->
+                </el-form-item>
+                <el-form-item label="荣誉图组">
+                    <el-upload ref="upload_honor_list_json" action="{:upload_url()}" accept="image/*" list-type="picture-card" limit="10" :file-list="main_detail.el_upload_honor_list_json" :disabled="is_disabled_upload_button" :before-upload="before_upload" :on-success="upload_file_list('honor_list_json')">
+                        <i class="el-icon-plus"></i>
+                    </el-upload>
+                    <el-alert type="warning" title="最多上传 10 张照片" show-icon="true" :closable="false">请上传 jpg、gif、png（RGB 格式）图片，且文件的大小不超过 200K</el-alert>
+                </el-form-item>
+                <el-form-item label="资质图组">
+                    <el-upload ref="upload_certificate_list_json" action="{:upload_url()}" accept="image/*" list-type="picture-card" limit="10" :file-list="main_detail.el_upload_certificate_list_json" :disabled="is_disabled_upload_button" :before-upload="before_upload" :on-success="upload_file_list('certificate_list_json')">
+                        <i class="el-icon-plus"></i>
+                    </el-upload>
+                    <el-alert type="warning" title="最多上传 10 张照片" show-icon="true" :closable="false">请上传 jpg、gif、png（RGB 格式）图片，且文件的大小不超过 200K</el-alert>
+                </el-form-item>
+                {/if}
+                <el-form-item label="排序" :required="true">
+                    <el-input-number placeholder="排序值" precision="0" :min="1" v-model="main_detail.sort"></el-input-number>
+                </el-form-item>
+                <el-form-item>
+                    <el-switch active-text="审核" v-model="main_detail.is_pass"></el-switch>
+                </el-form-item>
+                <el-form-item label="">
+                    <el-tabs type="border-card" v-model="tabs_content_active">
+                        <el-tab-pane label="内容" name="first_content_tab">
+                            <textarea id="content" ref="editor" v-model="main_detail.content"></textarea>
+                        </el-tab-pane>
+                    </el-tabs>
+                </el-form-item>
+                <div class="height_50"></div>
+            </el-tab-pane>
+            <el-tab-pane label="SEO 设置" name="second_tab">
+                <el-form-item label="title">
+                    <el-input placeholder="请输入 title" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.title"></el-input>
+                    <el-alert type="warning" title="留空 为 ‘单页面名称’" show-icon="true" :closable="false"></el-alert>
+                </el-form-item>
+                <el-form-item label="keywords">
+                    <el-input placeholder="请输入 keywords" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.keywords"></el-input>
+                </el-form-item>
+                <el-form-item label="description">
+                    <el-input placeholder="请输入 description" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.description"></el-input>
+                </el-form-item>
+            </el-tab-pane>
+            <el-tab-pane label="模板设置" name="third_tab">
+                <el-form-item label="详情页模板" :required="true">
+                    <el-input placeholder="请输入详情页模板" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.detail_view_path"></el-input>
+                    <el-alert type="warning" title="默认地址：intro/detail" show-icon="true" :closable="false"></el-alert>
+                </el-form-item>
+            </el-tab-pane>
+        </el-tabs>
+
+        <div class="pc_bottom_button_bar">
+            {:close_button()}
+            {:site_save_data_button()}
+        </div>
+    </el-form>
+</div>
+
+<script src="/static/renhe-ui/data/site_data.js"></script>
+<script src="/static/renhe-ui/data/intro_data.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                main_detail: intro_data.get_site_any_detail('{$id}'),
+                site_detail: site_data.get_site_any_detail('{$siter_login_detail["site_id"]}')
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

@@ -1,0 +1,58 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 站点后台 > 幻灯片 > 添加、修改
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-form class="padding_20" label-width="100px" @submit.native.prevent>
+        <el-form-item label="名称" :required="true">
+            <el-input placeholder="请输入名称" maxlength="20" show-word-limit="true" clearable="true" v-model="main_detail.swiper_name"></el-input>
+        </el-form-item>
+        <el-form-item label="宽高" :required="true">
+            <el-col :span="6">
+                <el-input placeholder="请输入宽度" v-model="main_detail.width">
+                    <template slot="prepend">宽度</template>
+                    <template slot="append">像素</template>
+                </el-input>
+            </el-col>
+            <el-col :span="1">&nbsp;</el-col>
+            <el-col :span="6">
+                <el-input placeholder="请输入高度" v-model="main_detail.height">
+                    <template slot="prepend">高度</template>
+                    <template slot="append">像素</template>
+                </el-input>
+            </el-col>
+        </el-form-item>
+        <el-form-item label="排序" :required="true">
+            <el-input-number placeholder="排序值" precision="0" :min="1" v-model="main_detail.sort"></el-input-number>
+        </el-form-item>
+        <el-form-item>
+            <el-switch active-text="审核" v-model="main_detail.is_pass"></el-switch>
+        </el-form-item>
+        <el-form-item label="幻灯片图片">
+            <el-upload ref="upload_image_list_json" action="{:upload_url()}" accept="image/*" list-type="picture-card" limit="10" :file-list="main_detail.el_upload_image_list_json" :disabled="is_disabled_upload_button" :before-upload="before_upload" :on-success="upload_file_list()">
+                <i class="el-icon-plus"></i>
+            </el-upload>
+            <el-alert type="warning" title="最多上传 10 张照片" show-icon="true" :closable="false">请上传 jpg、gif、png（RGB 格式）图片，且文件的大小不超过 200K</el-alert>
+        </el-form-item>
+
+        <div class="pc_bottom_button_bar">
+            {:close_button()}
+            {:site_save_data_button()}
+        </div>
+    </el-form>
+</div>
+
+<script src="/static/renhe-ui/data/swiper_data.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                main_detail: swiper_data.get_site_any_detail('{$id}')
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

@@ -1,0 +1,43 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 站点后台 > 优惠套餐 > 添加、修改
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-form class="padding_20" label-width="150px" @submit.native.prevent>
+        <el-form-item label="优惠套餐" :required="true">
+            <el-input placeholder="请输入优惠套餐名称" maxlength="20" show-word-limit="true" clearable="true" v-model="main_detail.discount_plan_name"></el-input>
+        </el-form-item>
+        <el-form-item label="订单商品金额" :required="true">
+            <el-input-number placeholder="请输入商品金额" precision="2" :min="0" v-model="main_detail.product_money"></el-input-number>
+        </el-form-item>
+        <el-form-item label="优惠金额" :required="true">
+            <el-input-number placeholder="请输入优惠金额" precision="2" :min="0" v-model="main_detail.discount_money"></el-input-number>
+        </el-form-item>
+        <el-form-item label="排序" :required="true">
+            <el-input-number placeholder="排序值" precision="0" :min="1" v-model="main_detail.sort"></el-input-number>
+        </el-form-item>
+        <el-form-item>
+            <el-switch active-text="审核" v-model="main_detail.is_pass"></el-switch>
+        </el-form-item>
+
+        <div class="pc_bottom_button_bar">
+            {:close_button()}
+            {:site_save_data_button()}
+        </div>
+    </el-form>
+</div>
+
+<script src="/static/renhe-ui/data/discount_plan_data.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                main_detail: discount_plan_data.get_site_any_detail('{$id}')
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

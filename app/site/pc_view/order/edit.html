@@ -1,0 +1,121 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 站点后台 > 订单 > 修改
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-form class="padding_20" label-width="100px" @submit.native.prevent>
+        <table class="layui-table" lay-size="sm">
+            <tr>
+                <td>用户名</td>
+                <td></td>
+                <td>姓名</td>
+                <td></td>
+                <td>订单号</td>
+                <td></td>
+                <td>下单时间</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>付款时间</td>
+                <td></td>
+                <td>付款方式</td>
+                <td></td>
+                <td>付款单号</td>
+                <td></td>
+                <td>发货时间</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>收货时间</td>
+                <td></td>
+                <td>商品种类(数)</td>
+                <td></td>
+                <td>商品数量</td>
+                <td></td>
+                <td>商品金额</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>优惠类型</td>
+                <td></td>
+                <td>优惠金额</td>
+                <td></td>
+                <td>运费金额</td>
+                <td></td>
+                <td>订单金额</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>实付金额</td>
+                <td></td>
+                <td>付款方式</td>
+                <td></td>
+                <td>收货人</td>
+                <td></td>
+                <td>电话</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>收货地址</td>
+                <td></td>
+                <td>快递公司</td>
+                <td></td>
+                <td>快递单号</td>
+                <td></td>
+                <td>状态</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>退款申请时间</td>
+                <td></td>
+                <td>退款确认时间</td>
+                <td></td>
+                <td>退款金额</td>
+                <td></td>
+                <td>退款说明</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="7"></td>
+            </tr>
+        </table>
+
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <td class="center_align width_50">图片</td>
+                <td class="center_align">商品名称</td>
+                <td class="center_align width_100">颜色</td>
+                <td class="center_align width_100">尺码</td>
+                <td class="center_align width_100">库存</td>
+                <td class="center_align width_100">购买数量</td>
+                <td class="center_align width_100">退货数量</td>
+                <td class="center_align width_50">单价(元)</td>
+                <td class="center_align width_50">小计(元)</td>
+                <td class="center_align width_50">优惠(元)</td>
+            </tr>
+            </thead>
+        </table>
+
+        <div class="pc_bottom_button_bar">
+            {:close_button()}
+            {:site_save_data_button()}
+        </div>
+    </el-form>
+</div>
+
+<script src="/static/renhe-ui/data/order_data.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                main_detail: order_data.get_site_any_detail('{$id}')
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

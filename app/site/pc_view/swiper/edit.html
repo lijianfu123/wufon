@@ -1,0 +1,145 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 站点后台 > 幻灯片 > 添加、修改
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-form class="padding_20" label-width="100px" @submit.native.prevent style="background: white;">
+        <el-form-item label="名称" :required="true">
+            <el-input placeholder="请输入名称" maxlength="20" show-word-limit="true" clearable="true" v-model="main_detail.swiper_name"></el-input>
+        </el-form-item>
+        <el-form-item label="宽高" :required="true">
+            <el-col :span="6">
+                <el-input placeholder="请输入宽度" v-model="main_detail.width">
+                    <template slot="prepend">宽度</template>
+                    <template slot="append">像素</template>
+                </el-input>
+            </el-col>
+            <el-col :span="1">&nbsp;</el-col>
+            <el-col :span="6">
+                <el-input placeholder="请输入高度" v-model="main_detail.height">
+                    <template slot="prepend">高度</template>
+                    <template slot="append">像素</template>
+                </el-input>
+            </el-col>
+        </el-form-item>
+        <el-form-item label="排序" :required="true">
+            <el-input-number placeholder="排序值" precision="0" :min="1" v-model="main_detail.sort"></el-input-number>
+        </el-form-item>
+        <el-form-item>
+            <el-switch active-text="审核" v-model="main_detail.is_pass"></el-switch>
+        </el-form-item>
+
+        <el-form-item label="幻灯片图片-1">
+            <el-col :span="12">
+                <el-input placeholder="请上传图片" readonly v-model="main_detail['image_list_json'][0]['image']"></el-input>
+            </el-col>
+            <el-col :span="4" style="padding-left: 10px;">
+                <el-upload ref="upload_image" action="{:upload_url()}" accept="image/*" :show-file-list="false" :on-success="uploadSuccess_1">
+                    <el-button type="success" class="el-icon-upload">点击上传</el-button>
+                </el-upload>
+            </el-col>
+        </el-form-item>
+        <el-form-item label="幻灯片链接-1">
+            <el-input placeholder="请填写链接1" v-model="main_detail['image_list_json'][0]['url']"></el-input>
+        </el-form-item>
+        <el-form-item label="幻灯片图片-2" style="border-top: 1px solid #cccccc; padding-top: 10px;">
+            <el-col :span="12">
+                <el-input placeholder="请上传图片" readonly v-model="main_detail['image_list_json'][1]['image']"></el-input>
+            </el-col>
+            <el-col :span="4" style="padding-left: 10px;">
+                <el-upload ref="upload_image_1" action="{:upload_url()}" accept="image/*" :show-file-list="false" :on-success="uploadSuccess_2">
+                    <el-button type="success" class="el-icon-upload">点击上传</el-button>
+                </el-upload>
+            </el-col>
+        </el-form-item>
+        <el-form-item label="幻灯片链接-2">
+            <el-input placeholder="请填写链接2" v-model="main_detail['image_list_json'][1]['url']"></el-input>
+        </el-form-item>
+        <el-form-item label="幻灯片图片-3" style="border-top: 1px solid #cccccc; padding-top: 10px;">
+            <el-col :span="12">
+                <el-input placeholder="请上传图片" readonly v-model="main_detail['image_list_json'][2]['image']"></el-input>
+            </el-col>
+            <el-col :span="4" style="padding-left: 10px;">
+                <el-upload ref="upload_image" action="{:upload_url()}" accept="image/*" :show-file-list="false" :on-success="uploadSuccess_3">
+                    <el-button type="success" class="el-icon-upload">点击上传</el-button>
+                </el-upload>
+            </el-col>
+        </el-form-item>
+        <el-form-item label="幻灯片链接-3">
+            <el-input placeholder="请填写链接3" v-model="main_detail['image_list_json'][2]['url']"></el-input>
+        </el-form-item>
+        <el-form-item label="幻灯片图片-4" style="border-top: 1px solid #cccccc; padding-top: 10px;">
+            <el-col :span="12">
+                <el-input placeholder="请上传图片" readonly v-model="main_detail['image_list_json'][3]['image']"></el-input>
+            </el-col>
+            <el-col :span="4" style="padding-left: 10px;">
+                <el-upload ref="upload_image" action="{:upload_url()}" accept="image/*" :show-file-list="false" :on-success="uploadSuccess_4">
+                    <el-button type="success" class="el-icon-upload">点击上传</el-button>
+                </el-upload>
+            </el-col>
+        </el-form-item>
+        <el-form-item label="幻灯片链接-4">
+            <el-input placeholder="请填写链接4" v-model="main_detail['image_list_json'][3]['url']"></el-input>
+        </el-form-item>
+        <el-form-item label="幻灯片图片-5" style="border-top: 1px solid #cccccc; padding-top: 10px;">
+            <el-col :span="12">
+                <el-input placeholder="请上传图片" readonly v-model="main_detail['image_list_json'][4]['image']"></el-input>
+            </el-col>
+            <el-col :span="4" style="padding-left: 10px;">
+                <el-upload ref="upload_image" action="{:upload_url()}" accept="image/*" :show-file-list="false" :on-success="uploadSuccess_5">
+                    <el-button type="success" class="el-icon-upload">点击上传</el-button>
+                </el-upload>
+            </el-col>
+        </el-form-item>
+        <el-form-item label="幻灯片链接-5">
+            <el-input placeholder="请填写链接5" v-model="main_detail['image_list_json'][4]['url']"></el-input>
+        </el-form-item>
+        <!--
+        <el-form-item label="幻灯片图片">
+            <el-upload ref="upload_image_list_json" action="{:upload_url()}" accept="image/*" list-type="picture-card" limit="10" :file-list="main_detail.el_upload_image_list_json" :disabled="is_disabled_upload_button" :before-upload="before_upload" :on-success="upload_file_list()">
+                <i class="el-icon-plus"></i>
+            </el-upload>
+            <el-alert type="warning" title="最多上传 10 张照片" show-icon="true" :closable="false">请上传 jpg、gif、png（RGB 格式）图片，且文件的大小不超过 200K</el-alert>
+        </el-form-item>
+        -->
+        <div class="pc_bottom_button_bar">
+            {:close_button()}
+            {:site_save_data_button()}
+        </div>
+    </el-form>
+</div>
+
+<script src="/static/renhe-ui/data/swiper_data.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                main_detail: swiper_data.get_site_any_detail('{$id}')
+            }
+        },
+        mounted() {
+
+        },
+        methods: {
+            uploadSuccess_1(response, file, fileList) {
+                this.main_detail['image_list_json'][0]['image'] = response.data[0];
+            },
+            uploadSuccess_2(response, file, fileList) {
+                this.main_detail['image_list_json'][1]['image'] = response.data[0];
+            },
+            uploadSuccess_3(response, file, fileList) {
+                this.main_detail['image_list_json'][2]['image'] = response.data[0];
+            },
+            uploadSuccess_4(response, file, fileList) {
+                this.main_detail['image_list_json'][3]['image'] = response.data[0];
+            },
+            uploadSuccess_5(response, file, fileList) {
+                this.main_detail['image_list_json'][4]['image'] = response.data[0];
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

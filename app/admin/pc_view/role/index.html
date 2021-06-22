@@ -1,0 +1,73 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 后台管理 > 角色 > 列表
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-row class="el-tool-bar">
+        <el-col :span="6">
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+                <el-breadcrumb-item>{{breadcrumb.first_role_rule_name}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{breadcrumb.second_role_rule_name}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{breadcrumb.third_role_rule_name}}</el-breadcrumb-item>
+            </el-breadcrumb>
+        </el-col>
+        <el-col :span="18" class="right_align padding_right_10">
+            {:admin_insert_button('95%', '95%')}
+            {:admin_update_sort_button()}
+            {:reload_data_button()}
+        </el-col>
+    </el-row>
+
+    <el-table ref="main_table" size="mini" border="true" stripe="true" highlight-current-row="true" cell-class-name="center_align" :max-height="table_max_height" @row-click="click_current_row">
+        <el-table-column label="ID" prop="id" width="50"></el-table-column>
+        <el-table-column label="角色名" prop="role_name"></el-table-column>
+        <el-table-column label="排序" width="100">
+            <template slot-scope="scope">
+                {:admin_sort_input()}
+            </template>
+        </el-table-column>
+        <el-table-column label="审核" width="100">
+            <template slot-scope="scope">
+                <div v-if="scope.row.is_main_admin">
+                    {:admin_update_is_pass_button(false)}
+                </div>
+                <div v-else>
+                    {:admin_update_is_pass_button()}
+                </div>
+            </template>
+        </el-table-column>
+        <el-table-column label="超管角色" width="100">
+            <template slot-scope="scope">
+                <div v-if="scope.row.is_main_admin">
+                    {:main_admin_ico()}
+                </div>
+            </template>
+        </el-table-column>
+        <el-table-column label="操作" width="180">
+            <template slot-scope="scope">
+                {:admin_update_button('95%', '95%')}
+
+                <span v-if="scope.row.is_main_admin === false">
+                    {:admin_delete_data_button()}
+                </span>
+            </template>
+        </el-table-column>
+    </el-table>
+</div>
+
+<script src="/static/renhe-ui/data/role_rule_data.js"></script>
+<script src="/static/renhe-ui/data/role_data.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                breadcrumb: role_rule_data.get_breadcrumb(),
+                main_list: role_data.get_admin_app_any_list()
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

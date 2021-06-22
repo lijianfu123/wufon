@@ -1,0 +1,43 @@
+<!-- 轮播图 -->
+<div class="swiper-container swiper-container1">
+    <div class="swiper-wrapper">
+        {swiper:image_list id='8'}
+        <div class="swiper-slide">
+            <img src="{$value['image']}" class="pc_banner">
+        </div>
+        {/swiper:image_list}
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+
+<!--面包屑-->
+<ul class="wrap navigation">
+    <li class="rotateInDownLeft animated wow">
+        <img src="/app/index/pc_view/image/address2.png" alt="地标"/>
+        当前位置：
+    </li>
+    <li class="rotateInDownLeft animated wow">
+        <a href="/" class="selectText">首页</a> >
+    </li>
+    <li class="rotateInDownLeft animated wow">
+        <span class="selectText">工程案例</span> >
+    </li>
+</ul>
+
+<!-- 列表 -->
+<div class="product-wrap wrap">
+    <ul>
+        {news:list news_class_id='3'}
+        <li>
+            <a href="{$value['news_detail_url']}">
+                <img src="{$value['image']}" alt="产品"/>
+                <p class="product-info">{$value['news_name']}</p>
+            </a>
+        </li>
+        {/news:list}
+    </ul>
+</div>
+
+<script>
+    set_nav(0); //设置 导航
+</script>

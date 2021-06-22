@@ -1,0 +1,55 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 站点后台 > 角色 > 添加、修改
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-form class="padding_20" label-width="100px" @submit.native.prevent>
+        <el-form-item label="角色名" :required="true">
+            <el-input :disabled="true" v-model="main_detail.role_name" v-if="main_detail.is_main_admin"></el-input>
+            <el-input placeholder="请输入角色名" maxlength="20" show-word-limit="true" clearable="true" v-model="main_detail.role_name" v-else></el-input>
+        </el-form-item>
+        <el-form-item label="排序" :required="true">
+            <el-input-number placeholder="排序值" precision="0" :min="1" v-model="main_detail.sort"></el-input-number>
+        </el-form-item>
+        <el-form-item>
+            <el-switch active-text="审核" :disabled="true" v-model="main_detail.is_pass" v-if="main_detail.is_main_admin"></el-switch>
+            <el-switch active-text="审核" v-model="main_detail.is_pass" v-else></el-switch>
+        </el-form-item>
+        <el-form-item label="权限规则">
+            <el-tree ref="role_rule_tree" node-key="id" default-expand-all="true" highlight-current="true" :show-checkbox="true" :check-strictly="false" :expand-on-click-node="false" :default-expanded-keys="[0]" :data="role_rule_pass_tree" @check-change="get_role_rule_ids()" style="border: 1px solid #DCDFE6; background: #f5f7fa; padding: 10px;"></el-tree>
+        </el-form-item>
+
+        <div class="height_50"></div>
+        <div class="pc_bottom_button_bar">
+            {:close_button()}
+            {:site_save_data_button()}
+        </div>
+    </el-form>
+</div>
+
+<script src="/static/renhe-ui/data/role_data.js"></script>
+<script src="/static/renhe-ui/data/role_rule_data.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                main_detail: role_data.get_site_any_detail('{$id}'),
+                role_rule_pass_tree: role_rule_data.get_site_app_pass_tree()
+            }
+        },
+        methods: {
+            get_role_rule_ids() {
+                this.main_detail.role_rule_ids = this.get_tree_ids(this.$refs.role_rule_tree); //获取 tree 选中节点
+            }
+        },
+        watch: {
+            is_init_data() {
+                this.set_tree_node_ids(this.$refs.role_rule_tree, this.main_detail.role_rule_ids, true); //设置 tree 节点（选中节点、超管禁用、是否第 3 层水平排放）
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

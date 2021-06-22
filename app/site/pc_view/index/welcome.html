@@ -1,0 +1,122 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 站点后台 > 首页 > 欢迎页
+-+--------------------------------------------------
+-->
+
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <div class="padding_10">
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <ul class="data_box">
+                        <li>
+                            <ol class="news_data">
+                                <li class="icon">
+                                    <i class="el-icon-document"></i>
+                                </li>
+                                <li class="data">
+                                    <div class="number">10</div>
+                                    <div class="text">新闻</div>
+                                </li>
+                            </ol>
+                        </li>
+                        <li>
+                            <ol class="product_data">
+                                <li class="icon">
+                                    <i class="el-icon-goods"></i>
+                                </li>
+                                <li class="data">
+                                    <div class="number">10</div>
+                                    <div class="text">商品</div>
+                                </li>
+                            </ol>
+                        </li>
+                        <li>
+                            <ol class="user_data">
+                                <li class="icon">
+                                    <i class="el-icon-user"></i>
+                                </li>
+                                <li class="data">
+                                    <div class="number">10</div>
+                                    <div class="text">会员</div>
+                                </li>
+                            </ol>
+                        </li>
+                        <li>
+                            <ol class="order_data">
+                                <li class="icon">
+                                    <i class="el-icon-s-order"></i>
+                                </li>
+                                <li class="data">
+                                    <div class="number">10</div>
+                                    <div class="text">订单</div>
+                                </li>
+                            </ol>
+                        </li>
+                        <div class="clear"></div>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">新闻</div>
+                    <div class="layui-card-body">
+                        ..
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">商品</div>
+                    <div class="layui-card-body">
+                        ..
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-md12">
+                <div class="layui-card padding_20">
+                    <div id="data_chart" style="width: 100%; height:400px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/echarts-4.2.1/echarts.js"></script>
+<script>
+    let chart_param = {
+        title: {
+            text: '数据报表'
+        },
+        grid: {
+            x: 80,
+            y: 50,
+            x2: 50,
+            y2: 50,
+        },
+        legend: {
+            data: ['会员', '订单']
+        },
+        color: ['blue', 'red'],
+        xAxis: {
+            data: ["2019-01", "2019-02", "2019-03", "2019-04", "2019-05", "2019-06"]
+        },
+        yAxis: {},
+        series: [{
+            name: '会员',
+            type: 'line',
+            data: [5, 20, 36, 10, 10, 20]
+        }, {
+            name: '订单',
+            type: 'line',
+            data: [50, 2, 136, 120, 140, 260]
+        }]
+    };
+
+    let vue = new base_vue();
+    let data_chart = echarts.init(document.getElementById('data_chart')).setOption(chart_param);
+</script>

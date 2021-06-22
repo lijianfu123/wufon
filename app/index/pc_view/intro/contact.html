@@ -1,0 +1,194 @@
+<!-- 轮播图 -->
+<div class="swiper-container swiper-container1">
+    <div class="swiper-wrapper">
+        {swiper:image_list id='7'}
+            <div class="swiper-slide">
+                <img src="{$value['image']}" class="pc_banner">
+            </div>
+        {/swiper:image_list}
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+
+<div class="about-container aboutDetail" style="background: none;">
+    <!--面包屑-->
+    <ul class="wrap navigation">
+        <li class="rotateInDownLeft animated wow">
+            <img src="/app/index/pc_view/image/address2.png" alt="地标" />
+            当前位置：
+        </li>
+        <li class="rotateInDownLeft animated wow">
+            <a href="/" class="selectText">首页</a> >
+        </li>
+        <li class="rotateInDownLeft animated wow">
+            <span class="selectText">{$main_detail['intro_name']}</span>
+        </li>
+    </ul>
+
+    <div class="contact-wrap wrap">
+        <div class="left">
+            <h2 class="rotateInDownRight animated wow">{$site_detail['site_name']}</h2>
+            <ul>
+                <li class="slideInRight animated wow">
+                    <label>公司地址：</label>
+                    <span>{$site_detail['address']}</span>
+                </li>
+                <li class="slideInLeft animated wow">
+                    <label>联 系 人：</label>
+                    <span>{$site_detail['linkman']}</span>
+                </li>
+                <li class="slideInRight animated wow">
+                    <label>Q &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Q：</label>
+                    <span>{$site_detail['qq']}</span>
+                </li>
+                <li class="slideInLeft animated wow">
+                    <label>手 机 号：</label>
+                    <span>{$site_detail['mobile']}（同微信）</span>
+                </li>
+                <li class="slideInRight animated wow">
+                    <label>电 &nbsp;&nbsp;&nbsp; 话：</label>
+                    <span>
+                        {php}
+                            $site_tel = $site_detail['tel'];
+                            $site_tel = trim($site_tel);
+
+                            $array = explode(' ', $site_tel);
+                            foreach ($array as $key => $value) {
+                                if ($key == 0) {
+                                    echo '<span>' . $value . '</span><br>';
+                                } else {
+                                    echo '<span style="padding-left: 76px;">' . $value . '</span><br>';
+                                }
+                            }
+                    {/php}
+                    </span>
+                </li>
+                <li class="slideInLeft animated wow">
+                    <label>传 &nbsp;&nbsp;&nbsp; 真：</label>
+                    <span>{$site_detail['fax']}</span>
+                </li>
+                <li class="slideInRight animated wow">
+                    <label>邮 &nbsp;&nbsp;&nbsp; 编：</label>
+                    <span>{$site_detail['post']}</span>
+                </li>
+                <li class="slideInLeft animated wow">
+                    <label>E - mail：</label>
+                    <span>{$site_detail['email']}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="right lightSpeedIn animated wow">
+<!--            <img src="{$main_detail['image']}" alt="">-->
+
+            <!-- <div id="container"></div>
+
+                       <script type="text/javascript" src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=GMZRmeUda5D3WVNMPfrUHuryod9ACsvb"></script>
+            <script type="text/javascript">
+                var map = new BMapGL.Map("container");
+                var point = new BMapGL.Point(116.404, 39.915);
+                map.centerAndZoom(point, 15);
+            </script>-->
+
+            {php}
+                //121.307139, 31.34996
+                $map_array = explode(',', $site_detail['map_point']);
+
+                if (!$app['is_mobile']) {
+            {/php}
+                <div id="allmap" style="width: 100%;height: 410px;"></div>
+            {php}
+                }
+            {/php}
+             <script type="text/javascript" src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=GMZRmeUda5D3WVNMPfrUHuryod9ACsvb"></script>
+             <script type="text/javascript">
+                // 百度地图API功能
+                var map = new BMapGL.Map("allmap");
+                
+                var point = new BMapGL.Point('{$map_array[0]}', '{$map_array[1]}');
+                map.centerAndZoom(point, 18);
+                map.enableScrollWheelZoom(true);
+
+
+                // 创建小图标
+                var pt = new BMapGL.Point('{$map_array[0]}', '{$map_array[1]}');
+                var marker = new BMapGL.Marker(pt);  // 创建标注
+                map.addOverlay(marker);              // 将标注添加到地图中
+            </script>
+        </div>
+    </div>
+
+    <div class="wrap remittance-info">
+        <ul class="slideInRight animated wow" style="width: 100%;padding-left: 6%;">
+            <h5>汇款信息（一）</h5>
+            <li>
+                <label>公司名称：</label>
+                <span>{$site_detail['company_1']}</span>
+            </li>
+            <li>
+                <label>公司地址：</label>
+                <span>{$site_detail['address_1']}</span>
+            </li>
+            <li>
+                <label>税务登记号：</label>
+                <span>{$site_detail['tax_1']}</span>
+            </li>
+            <li>
+                <label>开户行：</label>
+                <span>{$site_detail['bank_1']}</span>
+            </li>
+            <li>
+                <label>帐号：</label>
+                <span>{$site_detail['account_1']}</span>
+            </li>
+            <li>
+                <label>传真：</label>
+                <span>{$site_detail['fax_1']}</span>
+            </li>
+        </ul>
+        <div class="vertical"></div>
+        <ul class="slideInLeft animated wow" style="width: 100%;padding-left: 6%;">
+            <h5>汇款信息（二）</h5>
+            <li>
+                <label>公司名称：</label>
+                <span>{$site_detail['company_2']}</span>
+            </li>
+            <li>
+                <label>公司地址：</label>
+                <span>{$site_detail['address_2']}</span>
+            </li>
+            <li>
+                <label>税务登记号：</label>
+                <span>{$site_detail['tax_2']}</span>
+            </li>
+            <li>
+                <label>开户行：</label>
+                <span>{$site_detail['bank_2']}</span>
+            </li>
+            <li>
+                <label>帐号：</label>
+                <span>{$site_detail['account_2']}</span>
+            </li>
+            <li>
+                <label>传真：</label>
+                <span>{$site_detail['fax_2']}</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    set_nav(6); //设置 导航
+
+    var mySwiper = new Swiper('.swiper-container1', {
+        direction: 'horizontal',
+        loop: true,
+        autoplay: true,
+        delay: 3000,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            clickableClass: 'my-pagination-clickable',
+            autoplay: true
+        },
+    });
+</script>

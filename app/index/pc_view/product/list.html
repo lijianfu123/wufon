@@ -1,0 +1,74 @@
+<style>
+    .classifyList li {line-height: 30px; width: 240px;}
+</style>
+
+<!-- 轮播图 -->
+<div class="swiper-container swiper-container1">
+    <div class="swiper-wrapper">
+        {swiper:image_list id='3'}
+        <div class="swiper-slide">
+            <img src="{$value['image']}" class="pc_banner">
+        </div>
+        {/swiper:image_list}
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+
+<!--一级分类-->
+<ul class="switchTab">
+    {product_class:list parent_id='0'}
+        <li class="rotateInDownRight animated wow {if condition="($value.id == $main_detail.id) || ($value.id == $main_detail.parent_id)"}aboutPlateCheck{/if}">
+            <a href="{$value['product_list_url']}">{$value['product_class_name']}</a>
+        </li>
+    {/product_class:list}
+</ul>
+<img style="display: none;" src="/app/index/pc_view/image/rightCELL.png" alt="右滑" class="rightcell">
+<!--二级分类-->
+{php}$product_class_id = $main_detail['level'] == 2 ? $main_detail['parent_id']: $main_detail['id'];{/php}
+<ul class="wrap classifyList">
+    {product_class:list parent_id='$product_class_id'}
+        <li>
+            <a href="{$value['product_list_url']}">{$value['product_class_name']}</a>
+        </li>
+    {/product_class:list}
+</ul>
+
+<!--面包屑-->
+<ul class="wrap navigation" style="margin: 10px auto;">
+    <li class="rotateInDownLeft animated wow">
+        <img src="/app/index/pc_view/image/address2.png" alt="地标"/>
+        当前位置：
+    </li>
+    <li class="rotateInDownLeft animated wow">
+        <a href="/" class="selectText">首页</a> >
+    </li>
+    <li class="rotateInDownLeft animated wow">
+        <a href="" class="selectText">产品中心</a> >
+    </li>
+    <li class="rotateInDownLeft animated wow">
+        <span class="selectText">{$main_detail['product_class_name']}</span>
+    </li>
+</ul>
+
+<!-- 产品中心 -->
+<div class="product-wrap wrap">
+    <ul>
+        {volist name='main_page.list' id='value'}
+            <li>
+                <a href="{$value['product_detail_url']}">
+                    <img src="{$value['image']}" alt="产品"/>
+                    <p class="product-info">{$value['product_name']}</p>
+                </a>
+            </li>
+        {/volist}
+    </ul>
+
+    <!--页码-->
+    <div style="margin-top: 50px;">
+        {$main_page.page_bar|raw}
+    </div>
+</div>
+
+<script>
+    set_nav(2); //设置 导航
+</script>

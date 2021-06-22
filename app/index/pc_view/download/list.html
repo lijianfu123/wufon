@@ -1,0 +1,89 @@
+<!-- 轮播图 -->
+<div class="swiper-container swiper-container1">
+    <div class="swiper-wrapper">
+        {swiper:image_list id='6'}
+            <div class="swiper-slide">
+                <img src="{$value['image']}" class="pc_banner">
+            </div>
+        {/swiper:image_list}
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+
+<!--一级分类-->
+<ul class="switchTab">
+    {download_class:list parent_id='0'}
+        <li class="rotateInDownRight animated wow {if condition="($value['id'] == $main_detail.id) || ($value.id == $main_detail.parent_id)"}aboutPlateCheck{/if}">
+            <a href="{$value['download_list_url']}">{$value['download_class_name']}</a>
+        </li>
+    {/download_class:list}
+</ul>
+
+<!--二级分类
+{php}$download_class_id = $main_detail['level'] == 2 ? $main_detail['parent_id']: $main_detail['id'];{/php}
+<ul class="wrap classifyList">
+    {download_class:list parent_id='$download_class_id'}
+    <li>
+        <a href="{$value['download_list_url']}">{$value['download_class_name']}</a>
+    </li>
+    {/download_class:list}
+</ul>
+-->
+
+<!--面包屑-->
+<ul class="wrap navigation" style="margin-top: 20px;">
+    <li class="rotateInDownLeft animated wow">
+        <img src="/app/index/pc_view/image/address2.png" alt="地标"/>
+        当前位置：
+    </li>
+    <li class="rotateInDownLeft animated wow">
+        <a href="/" class="selectText">首页</a> >
+    </li>
+    <li class="rotateInDownLeft animated wow">
+        <span class="selectText">下载中心</span>
+    </li>
+</ul>
+
+<table class="wrap downloadTable" cellspacing="0">
+    <thead>
+    <tr>
+        <td>标题</td>
+<!--        <td style="width: 100px;">大小</td>-->
+        <td style="width: 100px;">下载次数</td>
+        <td style="width: 100px;">下载资料</td>
+    </tr>
+    </thead>
+    <tbody>
+    {volist name='main_page.list' id='value'}
+        <tr>
+            <td style="text-align: left; padding-left: 10px;">
+<!--                <a href="{$value['download_detail_url']}">{$value['download_name']}</a>-->
+                <a href="{:url('download?id=' . $value.id)}" target="_blank">{$value['download_name']}</a>
+            </td>
+<!--            <td>{$value['file_size']}M</td>-->
+            <td>{$value['download_count']}</td>
+            <td>
+                <!--
+                <a href="{:url('download?id=' . $value.id)}" target="_blank">
+                {if condition="(substr($value['file_url'], -3) == 'rar') || (substr($value['file_url'], -3) == 'zip')"}下载{else}查看{/if}
+                </a>
+                -->
+                {if condition="$value['file_url'] == ''"}
+                    <a href="{$value['download_detail_url']}">查看</a>
+                {else}
+                    <a href="{:url('download?id=' . $value.id)}" target="_blank">下载</a>
+                {/if}
+            </td>
+        </tr>
+    {/volist}
+    </tbody>
+</table>
+
+<!--页码-->
+<div style="padding: 30px;">
+    {$main_page.page_bar|raw}
+</div>
+
+<script>
+    set_nav(5); //设置 导航
+</script>

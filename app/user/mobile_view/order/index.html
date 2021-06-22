@@ -1,0 +1,93 @@
+<!--
+-+--------------------------------------------------
+-| 手机端
+-| 会员中心 > 订单 > 列表
+-+--------------------------------------------------
+-->
+<div id="app">
+    <van-nav-bar ref="nav_bar" title="我的订单" left-arrow @click-left="back()"></van-nav-bar>
+
+    <van-tabs v-model="order_tabs_active">
+        <van-tab title="待付款" name="1">
+            <van-panel class="margin_bottom_5">
+                <van-cell>
+                    <van-row>
+                        <van-col span="4" class="center_align">
+                            <van-image width="35" height="35" src="https://img.yzcdn.cn/vant/cat.jpeg" class="margin_top_5"></van-image>
+                        </van-col>
+                        <van-col span="20">
+                            <van-row class="padding_5">
+                                <van-col span="20">
+                                    南极人网红暖水袋南极人网红暖水袋南极人网红暖水袋南极人网红暖水袋
+                                </van-col>
+                                <van-col span="4" class="right_align gray">
+                                    <div>￥5.10</div>
+                                    <div>× 1</div>
+                                </van-col>
+                            </van-row>
+                        </van-col>
+                    </van-row>
+                </van-cell>
+                <van-cell>
+                    <van-row>
+                        <van-col span="4" class="center_align">
+                            <van-image width="35" height="35" src="https://img.yzcdn.cn/vant/cat.jpeg" class="margin_top_5"></van-image>
+                        </van-col>
+                        <van-col span="20">
+                            <van-row class="padding_5">
+                                <van-col span="20">
+                                    南极人网红暖水袋南极人网红暖水袋南极人网红暖水袋南极人网红暖水袋
+                                </van-col>
+                                <van-col span="4" class="right_align gray">
+                                    <div>￥5.10</div>
+                                    <div>× 1</div>
+                                </van-col>
+                            </van-row>
+                        </van-col>
+                    </van-row>
+                </van-cell>
+                <van-row slot="header" class="padding_10" style="border-bottom: 1px solid #f1f1f1;">
+                    <van-col span="14" class="gray">
+                        单号：<span class="black">20190814175154724536</span>
+                    </van-col>
+                    <van-col span="10" class="right_align">
+                        <span class="red">
+                            待付款
+                        </span>
+                    </van-col>
+                </van-row>
+                <van-row slot="footer">
+                    <div class="right_align gray padding_bottom_5">
+                        共 <span class="black">1</span> 件商品 合计：<span class="black">￥5.10</span>
+                    </div>
+                    <div class="right_align">
+                        <van-button type="info" icon="description" size="small" url="{:user_order_view_url(1)}">详情</van-button>
+                        <van-button type="primary" icon="logistics" size="small">物流</van-button>
+                        <van-button type="danger" icon="delete" size="small">删除</van-button>
+                    </div>
+                </van-row>
+            </van-panel>
+        </van-tab>
+        <van-tab title="待发货" name="wait_express">
+            待发货
+        </van-tab>
+        <van-tab title="待收款" name="wait_receive">
+            待收款
+        </van-tab>
+        <van-tab title="已完成" name="11">
+            已完成
+        </van-tab>
+    </van-tabs>
+</div>
+
+<script>
+    let vue_param = {
+        data() {
+            return {
+                order_tabs_active: '1'
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

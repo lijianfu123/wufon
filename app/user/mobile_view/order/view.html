@@ -1,0 +1,73 @@
+<div id="app">
+    <van-nav-bar ref="nav_bar" title="订单详情" left-arrow @click-left="back()"></van-nav-bar>
+
+    <van-panel class="margin_bottom_5">
+        <van-cell>
+            <van-row>
+                <van-col span="4" class="center_align">
+                    <van-image width="35" height="35" src="https://img.yzcdn.cn/vant/cat.jpeg" class="margin_top_5"></van-image>
+                </van-col>
+                <van-col span="20">
+                    <van-row class="padding_5">
+                        <van-col span="20">
+                            南极人网红暖水袋南极人网红暖水袋南极人网红暖水袋南极人网红暖水袋
+                        </van-col>
+                        <van-col span="4" class="right_align gray">
+                            <div>￥5.10</div>
+                            <div>× 1</div>
+                        </van-col>
+                    </van-row>
+                </van-col>
+            </van-row>
+        </van-cell>
+        <van-cell>
+            <van-row>
+                <van-col span="4" class="center_align">
+                    <van-image width="35" height="35" src="https://img.yzcdn.cn/vant/cat.jpeg" class="margin_top_5"></van-image>
+                </van-col>
+                <van-col span="20">
+                    <van-row class="padding_5">
+                        <van-col span="20">
+                            南极人网红暖水袋南极人网红暖水袋南极人网红暖水袋南极人网红暖水袋
+                        </van-col>
+                        <van-col span="4" class="right_align gray">
+                            <div>￥5.10</div>
+                            <div>× 1</div>
+                        </van-col>
+                    </van-row>
+                </van-col>
+            </van-row>
+        </van-cell>
+        <van-row slot="header" class="padding_10" style="border-bottom: 1px solid #f1f1f1;">
+            <van-col span="14" class="gray">
+                单号：<span class="black">20190814175154724536</span>
+            </van-col>
+            <van-col span="10" class="right_align">
+                        <span class="red">
+                            待付款
+                        </span>
+            </van-col>
+        </van-row>
+        <van-row slot="footer">
+            <div class="right_align gray padding_bottom_5">
+                共 <span class="black">1</span> 件商品 合计：<span class="black">￥5.10</span>
+            </div>
+            <div class="right_align">
+                <van-button type="primary" icon="logistics" size="small">物流</van-button>
+                <van-button type="danger" icon="delete" size="small">删除</van-button>
+            </div>
+        </van-row>
+    </van-panel>
+</div>
+
+<script>
+    let vue_param = {
+        data() {
+            return {
+
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

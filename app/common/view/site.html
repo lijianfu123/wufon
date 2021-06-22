@@ -1,0 +1,268 @@
+<el-tabs v-model="tabs_active">
+    <el-tab-pane label="系统设置" name="first_tab">
+        <el-form-item label="域名" :required="true">
+            <el-input placeholder="请输入域名" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.domain" v-if="main_detail.id === 0"></el-input>
+            <el-input disabled v-model="main_detail.domain" v-else></el-input>
+        </el-form-item>
+        <el-form-item label="站点名称" :required="true">
+            <el-input placeholder="请输入站点名称" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.site_name"></el-input>
+        </el-form-item>
+        <el-form-item label="联系人">
+            <el-input placeholder="请输入联系人" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.linkman"></el-input>
+        </el-form-item>
+        <el-form-item label="电话">
+            <el-input placeholder="请输入电话" maxlength="200" show-word-limit="true" clearable="true" v-model="main_detail.tel"></el-input>
+        </el-form-item>
+        <el-form-item label="手机">
+            <el-input placeholder="请输入手机" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.mobile"></el-input>
+        </el-form-item>
+        <el-form-item label="传真">
+            <el-input placeholder="请输入传真" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.fax"></el-input>
+        </el-form-item>
+        <el-form-item label="邮编">
+            <el-input placeholder="请输入邮编" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.post"></el-input>
+        </el-form-item>
+        <el-form-item label="客服 QQ">
+            <el-input placeholder="请输入客服 QQ" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.qq"></el-input>
+        </el-form-item>
+        <el-form-item label="邮箱">
+            <el-input placeholder="请输入手机" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.email"></el-input>
+        </el-form-item>
+        <el-form-item label="ICP 备案号">
+            <el-input placeholder="请输入ICP 备案号" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.icp"></el-input>
+        </el-form-item>
+
+        <!--        -->
+        <el-form-item label="专利">
+            <el-input placeholder="请输入专利数" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.zhuan_li" style="width: 200px;"></el-input>
+        </el-form-item>
+        <el-form-item label="发明专利">
+            <el-input placeholder="请输入发明专利数" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.fa_ming" style="width: 200px;"></el-input>
+        </el-form-item>
+        <el-form-item label="实用新型专利">
+            <el-input placeholder="请输入实用新型专利数" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.shi_yong_xin_xing" style="width: 200px;"></el-input>
+        </el-form-item>
+        <el-form-item label="外观专利">
+            <el-input placeholder="请输入外观专利数" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.wai_guan" style="width: 200px;"></el-input>
+        </el-form-item>
+        <el-form-item label="计算机软著专利">
+            <el-input placeholder="请输入计算机软著专利数" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.ji_suan_ji_ruan_zhu" style="width: 200px;"></el-input>
+        </el-form-item>
+        <!--
+        <el-form-item label="省市县">
+            <el-cascader placeholder="请选择省市县" :options="city_pass_cascader" :props="{expandTrigger: 'hover'}" clearable="true" v-model="main_detail.city_ids_json" style="width: 100%;"></el-cascader>
+        </el-form-item>
+        -->
+        <el-form-item label="地址">
+            <el-input placeholder="请输入地址" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.address"></el-input>
+        </el-form-item>
+
+        <el-form-item label="百度地图坐标">
+            <el-input placeholder="请输入百度地图坐标" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.map_point" style="width: 300px;"></el-input>
+            <el-alert type="warning" title="百度地图坐标拾取系统：http://api.map.baidu.com/lbsapi/getpoint/index.html" show-icon="true" :closable="false"></el-alert>
+        </el-form-item>
+    </el-tab-pane>
+
+    <el-tab-pane label="汇款信息-1" name="second_tab">
+        <el-form-item label="公司名称">
+            <el-input placeholder="请输入公司名称" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.company_1"></el-input>
+        </el-form-item>
+        <el-form-item label="公司地址">
+            <el-input placeholder="请输入公司地址" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.address_1"></el-input>
+        </el-form-item>
+        <el-form-item label="税务登记号">
+            <el-input placeholder="请输入税务登记号" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.tax_1"></el-input>
+        </el-form-item>
+        <el-form-item label="开户行">
+            <el-input placeholder="请输入开户行" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.bank_1"></el-input>
+        </el-form-item>
+        <el-form-item label="帐号">
+            <el-input placeholder="请输入帐号" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.account_1"></el-input>
+        </el-form-item>
+        <el-form-item label="传真">
+            <el-input placeholder="请输入传真" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.fax_1"></el-input>
+        </el-form-item>
+    </el-tab-pane>
+    <el-tab-pane label="汇款信息-2" name="second_tab_2">
+        <el-form-item label="公司名称">
+            <el-input placeholder="请输入公司名称" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.company_2"></el-input>
+        </el-form-item>
+        <el-form-item label="公司地址">
+            <el-input placeholder="请输入公司地址" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.address_2"></el-input>
+        </el-form-item>
+        <el-form-item label="税务登记号">
+            <el-input placeholder="请输入税务登记号" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.tax_2"></el-input>
+        </el-form-item>
+        <el-form-item label="开户行">
+            <el-input placeholder="请输入开户行" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.bank_2"></el-input>
+        </el-form-item>
+        <el-form-item label="帐号">
+            <el-input placeholder="请输入帐号" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.account_2"></el-input>
+        </el-form-item>
+        <el-form-item label="传真">
+            <el-input placeholder="请输入传真" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.fax_2"></el-input>
+        </el-form-item>
+    </el-tab-pane>
+    
+    <el-tab-pane label="公众号设置" name="second_tab_3">
+        <el-form-item label="公众号图片">
+            <el-col :span="3">
+                <el-upload ref="upload_wechat_image" action="{:upload_url()}" accept="image/*" :show-file-list="false" :disabled="is_disabled_upload_button" :before-upload="before_upload" :on-success="upload_file('wechat_image')">
+                    <el-button type="success" class="el-icon-upload" :disabled="is_disabled_upload_button" :loading="is_loading_upload_button">点击上传</el-button>
+                </el-upload>
+            </el-col>
+            <el-col :span="2">
+                <el-image class="hand_cursor width_40 height_40" :src="main_detail.wechat_image" v-if="(main_detail.wechat_image !== undefined) && (main_detail.wechat_image !== '')" @click="show_image(main_detail.wechat_image)"></el-image>
+            </el-col>
+            <el-alert type="warning" title="请上传 jpg、gif、png（RGB 格式）图片，且文件的大小不超过 200K" show-icon="true" :closable="false"></el-alert>
+        </el-form-item>
+        <el-form-item label="公众号名称">
+            <el-input placeholder="请输入公众号名称" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.wechat_name"></el-input>
+        </el-form-item>
+        <el-form-item label="公众号 AppId">
+            <el-input placeholder="请输入公众号 AppId" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.wechat_app_id"></el-input>
+        </el-form-item>
+        <el-form-item label="公众号 AppSecret">
+            <el-input placeholder="请输入公众号 AppSecret" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.wechat_app_secret"></el-input>
+        </el-form-item>
+        <el-form-item label="公众号 Token">
+            <el-input placeholder="请输入公众号 Token" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.wechat_token"></el-input>
+        </el-form-item>
+        <el-form-item label="微信支付商户号">
+            <el-input placeholder="请输入微信支付商户号" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.wechat_pay_name"></el-input>
+        </el-form-item>
+        <el-form-item label="微信支付密钥">
+            <el-input placeholder="请输入微信支付密钥" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.wechat_pay_password"></el-input>
+        </el-form-item>
+    </el-tab-pane>
+    <!--
+    <el-tab-pane label="财务设置" name="third_tab">
+        <el-form-item label="最小提现金额（元）">
+            <el-input-number placeholder="请输入最小提现金额（元）" precision="2" :min="0" v-model="main_detail.min_withdraw_money"></el-input-number>
+        </el-form-item>
+        <el-form-item label="最大提现金额（元）">
+            <el-input-number placeholder="请输入最大提现金额（元）" precision="2" :min="0" :max="99999" v-model="main_detail.max_withdraw_money"></el-input-number>
+        </el-form-item>
+        <el-form-item label="提现手续费（%）">
+            <el-input-number placeholder="请输入提现手续费（%）" precision="2" :min="0" :max="100" v-model="main_detail.withdraw_fee_ratio"></el-input-number>
+        </el-form-item>
+    </el-tab-pane>
+    <el-tab-pane label="积分设置" name="fourth_tab">
+        <el-form-item label="关注公众号积分">
+            <el-input-number placeholder="请输入关注公众号积分" precision="0" :min="0" v-model="main_detail.subscribe_wechat_point"></el-input-number>
+        </el-form-item>
+        <el-form-item label="首次签到积分">
+            <el-input-number placeholder="请输入首次签到积分" precision="0" :min="0" v-model="main_detail.first_sign_point"></el-input-number>
+        </el-form-item>
+        <el-form-item label="每日签到积分">
+            <el-input-number placeholder="请输入每日签到积分" precision="0" :min="0" v-model="main_detail.day_sign_point"></el-input-number>
+        </el-form-item>
+        <el-form-item label="连续7天签到积分">
+            <el-input-number placeholder="请输入连续7天签到积分" precision="0" :min="0" v-model="main_detail.week_sign_point"></el-input-number>
+        </el-form-item>
+        <el-form-item label="首单奖励积分">
+            <el-input-number placeholder="请输入首次下单奖励积分" precision="0" :min="0" v-model="main_detail.first_order_point"></el-input-number>
+        </el-form-item>
+    </el-tab-pane>
+    -->
+    <el-tab-pane label="SEO 设置" name="fifth_tab">
+        <el-form-item label="title">
+            <el-input placeholder="请输入 title" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.title"></el-input>
+            <el-alert type="warning" title="留空 为 ‘站点名称’" show-icon="true" :closable="false"></el-alert>
+        </el-form-item>
+        <el-form-item label="keywords">
+            <el-input placeholder="请输入 keywords" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.keywords"></el-input>
+        </el-form-item>
+        <el-form-item label="description">
+            <el-input placeholder="请输入 description" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.description"></el-input>
+        </el-form-item>
+    </el-tab-pane>
+    <el-tab-pane label="模板设置" name="sixth_tab">
+        <el-form-item label="电脑端-模板文件夹">
+            <el-input placeholder="请输入电脑端-模板文件夹" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.pc_view_folder"></el-input>
+        </el-form-item>
+        <el-form-item label="手机端-模板文件夹">
+            <el-input placeholder="请输入手机端模板文件夹" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.mobile_view_folder"></el-input>
+        </el-form-item>
+        <el-form-item label="首页模板">
+            <el-input placeholder="请输入首页模板" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.index_index_view_path"></el-input>
+        </el-form-item>
+        <el-form-item label="单页面默认模板">
+            <el-input placeholder="请输入单页面默认模板" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.intro_detail_view_path"></el-input>
+        </el-form-item>
+        <el-form-item label="新闻中心模板">
+            <el-input placeholder="请输入新闻中心模板" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.news_index_view_path"></el-input>
+        </el-form-item>
+        <el-form-item label="新闻列表默认模板">
+            <el-input placeholder="请输入新闻列表默认模板" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.news_list_view_path"></el-input>
+        </el-form-item>
+        <el-form-item label="新闻详情默认模板">
+            <el-input placeholder="请输入新闻详情默认模板" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.news_detail_view_path"></el-input>
+        </el-form-item>
+        <el-form-item label="商城首页模板">
+            <el-input placeholder="请输入商城首页模板" maxlength="50" show-word-limit="true" clearable="true" v-model="main_detail.product_index_view_path"></el-input>
+        </el-form-item>
+        <el-form-item label="商品列表默认模板">
+            <el-input placeholder="请输入商品列表默认模板" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.product_list_view_path"></el-input>
+        </el-form-item>
+        <el-form-item label="商品详情默认模板">
+            <el-input placeholder="请输入商品详情默认模板" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.product_detail_view_path"></el-input>
+        </el-form-item>
+        <el-form-item label="下载中心默认模板">
+            <el-input placeholder="请输入下载中心默认模板" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.download_index_view_path"></el-input>
+        </el-form-item>
+        <el-form-item label="下载列表默认模板">
+            <el-input placeholder="请输入下载列表默认模板" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.download_list_view_path"></el-input>
+        </el-form-item>
+        <el-form-item label="下载详情默认模板">
+            <el-input placeholder="请输入下载详情默认模板" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.download_detail_view_path"></el-input>
+        </el-form-item>
+    </el-tab-pane>
+    <el-tab-pane label="图片宽高" name="seventh_tabs">
+        <el-form-item label="单页面-图片">
+            <el-col :span="4">
+                <el-input placeholder="请输入宽度" v-model="main_detail.intro_image_width">
+                    <template slot="prepend">宽度</template>
+                    <template slot="append">像素</template>
+                </el-input>
+            </el-col>
+            <el-col :span="1">&nbsp;</el-col>
+            <el-col :span="4">
+                <el-input placeholder="请输入高度" v-model="main_detail.intro_image_height">
+                    <template slot="prepend">高度</template>
+                    <template slot="append">像素</template>
+                </el-input>
+            </el-col>
+        </el-form-item>
+        <el-form-item label="新闻-图片">
+            <el-col :span="4">
+                <el-input placeholder="请输入宽度" v-model="main_detail.news_image_width">
+                    <template slot="prepend">宽度</template>
+                    <template slot="append">像素</template>
+                </el-input>
+            </el-col>
+            <el-col :span="1">&nbsp;</el-col>
+            <el-col :span="4">
+                <el-input placeholder="请输入高度" v-model="main_detail.news_image_height">
+                    <template slot="prepend">高度</template>
+                    <template slot="append">像素</template>
+                </el-input>
+            </el-col>
+        </el-form-item>
+        <el-form-item label="商品-图片">
+            <el-col :span="4">
+                <el-input placeholder="请输入宽度" v-model="main_detail.product_image_width">
+                    <template slot="prepend">宽度</template>
+                    <template slot="append">像素</template>
+                </el-input>
+            </el-col>
+            <el-col :span="1">&nbsp;</el-col>
+            <el-col :span="4">
+                <el-input placeholder="请输入高度" v-model="main_detail.product_image_height">
+                    <template slot="prepend">高度</template>
+                    <template slot="append">像素</template>
+                </el-input>
+            </el-col>
+        </el-form-item>
+    </el-tab-pane>
+</el-tabs>

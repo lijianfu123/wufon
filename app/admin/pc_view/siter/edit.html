@@ -1,0 +1,44 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 后台管理 > 站点管理员 > 添加、修改
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-form class="padding_20" label-width="100px" @submit.native.prevent>
+        <el-form-item label="站点">
+            <el-select v-model="main_detail.site_id">
+                <el-option v-for="site in site_pass_option" :label="site.site_name" :value="site.id"></el-option>
+            </el-select>
+        </el-form-item>
+        <el-form-item label="用户名" :required="true">
+            <el-input placeholder="请输入用户名" maxlength="20" show-word-limit="true" clearable="true" v-model="main_detail.username" v-if="main_detail.id === 0"></el-input>
+            <el-input disabled v-model="main_detail.username" v-else></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+            <el-input type="password" placeholder="请输入密码" maxlength="20" show-word-limit="true" clearable="true" v-model="main_detail.password"></el-input>
+            <el-alert type="warning" title="不修改密码 请留空" show-icon="true" :closable="false" v-show="main_detail.id > 0"></el-alert>
+        </el-form-item>
+
+        <div class="height_50"></div>
+        <div class="pc_bottom_button_bar">
+            {:close_button()}
+            {:admin_save_data_button()}
+        </div>
+    </el-form>
+</div>
+
+<script src="/static/renhe-ui/data/site_data.js"></script>
+<script src="/static/renhe-ui/data/siter_data.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                site_pass_option: site_data.get_pass_option(),
+                main_detail: siter_data.get_any_detail('{$id}')
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

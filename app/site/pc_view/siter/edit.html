@@ -1,0 +1,53 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 站点后台 > 站点管理员 > 添加、修改
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-form class="padding_20" label-width="100px" @submit.native.prevent>
+        <el-form-item label="角色" :required="true">
+            <el-select :disabled="true" v-model="main_detail.role_id" v-if="main_detail.is_main_admin">
+                <el-option v-for="role in role_pass_option" :label="role.role_name" :value="role.id"></el-option>
+            </el-select>
+            <el-select v-model="main_detail.role_id" v-else>
+                <el-option v-for="role in role_pass_option" :label="role.role_name" :value="role.id"></el-option>
+            </el-select>
+        </el-form-item>
+        <el-form-item label="用户名" :required="true">
+            <el-input placeholder="请输入用户名" maxlength="20" show-word-limit="true" clearable="true" v-model="main_detail.username" v-if="main_detail.id === 0"></el-input>
+            <el-input disabled v-model="main_detail.username" v-else></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+            <el-input type="password" placeholder="请输入密码" maxlength="20" show-word-limit="true" clearable="true" v-model="main_detail.password"></el-input>
+            <el-alert type="warning" title="不修改密码 请留空" show-icon="true" :closable="false" v-show="main_detail.id > 0"></el-alert>
+        </el-form-item>
+        <el-form-item label="排序" :required="true">
+            <el-input-number placeholder="排序值" precision="0" :min="1" v-model="main_detail.sort"></el-input-number>
+        </el-form-item>
+        <el-form-item>
+            <el-switch active-text="审核" :disabled="true" v-model="main_detail.is_pass" v-if="main_detail.is_main_admin"></el-switch>
+            <el-switch active-text="审核" v-model="main_detail.is_pass" v-else></el-switch>
+        </el-form-item>
+
+        <div class="pc_bottom_button_bar">
+            {:close_button()}
+            {:site_save_data_button()}
+        </div>
+    </el-form>
+</div>
+
+<script src="/static/renhe-ui/data/siter_data.js"></script>
+<script src="/static/renhe-ui/data/role_data.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                main_detail: siter_data.get_site_any_detail('{$id}'),
+                role_pass_option: role_data.get_site_pass_option()
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

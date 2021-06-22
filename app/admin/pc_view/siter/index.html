@@ -1,0 +1,94 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 后台管理 > 站点管理员 > 列表
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-row class="el-tool-bar">
+        <el-col :span="6">
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+                <el-breadcrumb-item>{{breadcrumb.first_role_rule_name}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{breadcrumb.second_role_rule_name}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{breadcrumb.third_role_rule_name}}</el-breadcrumb-item>
+            </el-breadcrumb>
+        </el-col>
+        <el-col :span="12">
+            <el-form @submit.native.prevent>
+                <el-row :gutter="5">
+                    <el-col span="8" class="right_align">
+                        <el-select ref="search_site_id" size="mini" v-model="search_default_data.site_id">
+                            <el-option v-for="site in site_pass_option" :label="site.site_name" :value="site.id"></el-option>
+                        </el-select>
+                    </el-col>
+                    <el-col span="12">
+                        <el-input ref="search_keyword" size="mini" placeholder="请输入用户名" maxlength="20" show-word-limit="true" clearable="true" v-model="search_default_data.keyword"></el-input>
+                    </el-col>
+                    <el-col span="4">
+                        {:search_data_button()}
+                    </el-col>
+                </el-row>
+            </el-form>
+        </el-col>
+        <el-col :span="6" class="right_align padding_right_10">
+            {:admin_insert_button(600, 400)}
+            {:reload_data_button()}
+        </el-col>
+    </el-row>
+
+    <el-table ref="main_table" size="mini" border="true" stripe="true" highlight-current-row="true" cell-class-name="center_align" :max-height="table_max_height" @row-click="click_current_row">
+        <el-table-column label="ID" prop="id" width="50"></el-table-column>
+        <el-table-column label="站点名称" prop="Site.site_name"></el-table-column>
+        <el-table-column label="用户">
+            <template slot-scope="scope">
+                <span v-html="highlight_keyword(scope.row.username)"></span>
+            </template>
+        </el-table-column>
+        <el-table-column label="创建时间" prop="create_time"></el-table-column>
+        <el-table-column label="审核" width="100">
+            <template slot-scope="scope">
+                <div v-if="scope.row.is_main_admin">
+                    {:admin_update_is_pass_button(false)}
+                </div>
+                <div v-else>
+                    {:admin_update_is_pass_button()}
+                </div>
+            </template>
+        </el-table-column>
+        <el-table-column label="超管用户" width="100">
+            <template slot-scope="scope">
+                <div v-if="scope.row.is_main_admin">
+                    {:main_admin_ico()}
+                </div>
+            </template>
+        </el-table-column>
+        <el-table-column label="操作" width="200">
+            <template slot-scope="scope">
+                {:admin_update_button(600, 400)}
+                {:admin_delete_data_button()}
+            </template>
+        </el-table-column>
+    </el-table>
+
+    <div class="pc_table_footer_bar right_align">
+        {:page_bar()}
+    </div>
+</div>
+
+<script src="/static/renhe-ui/data/role_rule_data.js"></script>
+<script src="/static/renhe-ui/data/site_data.js"></script>
+<script src="/static/renhe-ui/data/siter_data.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                breadcrumb: role_rule_data.get_breadcrumb(),
+                site_pass_option: site_data.get_pass_option(),
+                main_page: siter_data.get_any_page(),
+                search_default_data: siter_data.get_search_default_data()
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

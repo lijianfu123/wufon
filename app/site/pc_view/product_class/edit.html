@@ -1,0 +1,69 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 站点后台 > 商品分类 > 添加、修改
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-form class="padding_20" label-width="100px" @submit.native.prevent>
+        <el-tabs v-model="tabs_active">
+            <el-tab-pane label="内容管理" name="first_tab">
+                <el-form-item label="所属分类">
+                    <el-select v-model="main_detail.parent_id">
+                        <el-option v-for="product_class in product_class_siter_pass_first_level_option" :label="product_class.product_class_name" :value="product_class.id"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="商品分类" :required="true">
+                    <el-input placeholder="请输入商品分类" maxlength="20" show-word-limit="true" clearable="true" v-model="main_detail.product_class_name"></el-input>
+                </el-form-item>
+                <el-form-item label="排序" :required="true">
+                    <el-input-number placeholder="排序值" precision="0" :min="1" v-model="main_detail.sort"></el-input-number>
+                </el-form-item>
+                <el-form-item>
+                    <el-switch active-text="审核" v-model="main_detail.is_pass"></el-switch>
+                </el-form-item>
+            </el-tab-pane>
+            <el-tab-pane label="SEO 设置" name="second_tab">
+                <el-form-item label="title">
+                    <el-input placeholder="请输入 title" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.title"></el-input>
+                    <el-alert type="warning" title="留空 为 ‘商品分类名称’" show-icon="true" :closable="false"></el-alert>
+                </el-form-item>
+                <el-form-item label="keywords">
+                    <el-input placeholder="请输入 keywords" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.keywords"></el-input>
+                </el-form-item>
+                <el-form-item label="description">
+                    <el-input placeholder="请输入 description" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.description"></el-input>
+                </el-form-item>
+            </el-tab-pane>
+            <el-tab-pane label="模板设置" name="third_tab">
+                <el-form-item label="列表页模板" :required="true">
+                    <el-input placeholder="请输入列表页模板" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.list_view_path"></el-input>
+                    <el-alert type="warning" title="默认地址：product/list" show-icon="true" :closable="false"></el-alert>
+                </el-form-item>
+                <el-form-item label="详情页模板" :required="true">
+                    <el-input placeholder="请输入详情页模板" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.detail_view_path"></el-input>
+                    <el-alert type="warning" title="默认地址：product/list" show-icon="true" :closable="false"></el-alert>
+                </el-form-item>
+            </el-tab-pane>
+        </el-tabs>
+
+        <div class="pc_bottom_button_bar">
+            {:close_button()}
+            {:site_save_data_button()}
+        </div>
+    </el-form>
+</div>
+
+<script src="/static/renhe-ui/data/product_class_data.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                main_detail: product_class_data.get_site_any_detail('{$id}'),
+                product_class_siter_pass_first_level_option: product_class_data.get_site_pass_first_level_option()
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

@@ -1,0 +1,176 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 站点后台 > 智投 > 添加、修改
+-+--------------------------------------------------
+-->
+{php}
+$id = input('id');
+if ($id == 0) {
+    $in_time = '';
+    $out_time = '';
+    $product_id = '';
+    $product_name = '';
+}else{
+    $product_select_detail = (new \app\common\model\ProductSelectModel())->find($id);
+    $product_detail = (new \app\common\model\ProductModel())->find($product_select_detail['product_id']);
+
+    //$in_time = date('Y-m-d H:i:s', $product_select_detail['in_time']);
+    $in_time = $product_select_detail['in_time'];
+
+    //$out_time = date('Y-m-d H:i:s', $product_select_detail['out_time']);
+    $out_time = $product_select_detail['out_time'];
+
+    $product_id = $product_select_detail['id'];
+    $product_name = $product_detail['product_name'];
+}
+{/php}
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-form class="padding_20" label-width="150px" @submit.native.prevent>
+        <el-form-item label="股票">
+            <el-row>
+                <el-col :span="16">
+                    <input placeholder="请选择股票" readonly class="layui-input" id="product_name" value="{$product_name}">
+                </el-col>
+                <el-col :span="1">&nbsp;</el-col>
+                <el-col :span="5">
+                    <el-button type="success" @click="choolse_product">选择股票</el-button>
+                </el-col>
+            </el-row>
+        </el-form-item>
+        <el-form-item label="入选时间">
+            <input placeholder="选择入选时间" class="layui-input" id="in_time" style="width: 200px;" value="{$in_time}">
+        </el-form-item>
+        <el-form-item label="退出时间">
+            <input placeholder="选择入选时间" class="layui-input" id="out_time" style="width: 200px;" value="{$out_time}">
+        </el-form-item>
+        <el-form-item label="所属分类">
+            <el-select v-model="main_detail.product_class_id">
+                <el-option v-for="product_class in product_class_siter_pass_option"
+                           :label="product_class.product_class_name" :value="product_class.id"></el-option>
+            </el-select>
+        </el-form-item>
+        <!--
+        <el-form-item label="类型">
+            <el-select v-model="main_detail.select_type">
+                <el-option label="当前入选" :value="1"></el-option>
+                <el-option label="历史入选" :value="2"></el-option>
+            </el-select>
+        </el-form-item>
+        -->
+        <el-form-item label="最大涨幅（%）">
+            <el-input-number v-model="main_detail.max" :min="0" :max="100"></el-input-number>
+        </el-form-item>
+        <el-form-item label="当前价格（元）">
+            <el-input-number v-model="main_detail.current_price" :min="0"></el-input-number>
+        </el-form-item>
+        <el-form-item label="入选价格（元）">
+            <el-input-number v-model="main_detail.price" :min="0"></el-input-number>
+        </el-form-item>
+        <!--        <el-form-item>-->
+        <!--            <el-switch active-text="审核" v-model="main_detail.is_pass"></el-switch>-->
+        <!--        </el-form-item>-->
+        <div class="pc_bottom_button_bar">
+            {:close_button()}
+
+            <input type="hidden" id="id" value="{$id}">
+            <input type="hidden" id="product_id" value="{$product_id}">
+            <el-button type="primary" native-type="submit" class="el-icon-check" size="mini" @click="save_data()">提交</el-button>
+        </div>
+    </el-form>
+</div>
+
+<script src="/static/renhe-ui/data/product_data.js"></script>
+<script src="/static/renhe-ui/data/product_class_data.js"></script>
+<script src="/static/renhe-ui/data/product_select_data.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                main_detail: product_select_data.get_any_detail('{$id}'),
+                product_class_siter_pass_option: product_class_data.get_site_pass_option()
+            }
+        },
+        methods: {
+            choolse_product: function () {
+                layer.open({
+                    type: 2,
+                    shade: 0.1,
+                    title: '选择股票',
+                    content: '{:url("choose_product")}',
+                    area: ['95%', '95%']
+                });
+            },
+            save_data() {
+                let id = $('#id').val();
+
+                let in_time = $('#in_time').val();
+                if (in_time === '') {
+                    layer.msg('请选择入选时间');
+
+                    return false;
+                }
+
+                let out_time = $('#out_time').val();
+                if (out_time === '') {
+                    layer.msg('请选择入选时间');
+
+                    return false;
+                }
+
+                let product_id = $('#product_id').val();
+                if (product_id === '' || product_id === 0) {
+                    layer.msg('请选择股票');
+
+                    return false;
+                }
+
+                let product_class_id = this.main_detail.product_class_id;
+                if (product_class_id === 0) {
+                    layer.msg('请选择分类');
+
+                    return false;
+                }
+
+                let select_type = this.main_detail.select_type;
+                let max = this.main_detail.max;
+                let price = this.main_detail.price;
+                let current_price = this.main_detail.current_price;
+
+                let data = {
+                    id: id,
+                    in_time: in_time,
+                    out_time: out_time,
+                    product_id: product_id,
+                    product_class_id: product_class_id,
+                    select_type: select_type,
+                    max: max,
+                    price: price,
+                    current_price: current_price
+                };
+
+                $.post('/api/ProductSelect/save_data', data, (response) => {
+                    if (response.error_code === 0) {
+                        parent.location.reload();
+                    } else {
+
+                    }
+                });
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+
+    layui.laydate.render({
+        elem: '#in_time',
+        type: 'datetime',
+        format: 'yyyy-MM-dd HH:mm:ss'
+    });
+
+    layui.laydate.render({
+        elem: '#out_time',
+        type: 'datetime',
+        format: 'yyyy-MM-dd HH:mm:ss'
+    });
+</script>

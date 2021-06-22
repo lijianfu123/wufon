@@ -1,0 +1,45 @@
+<!--
+-+--------------------------------------------------
+-| 布局文件
+-+--------------------------------------------------
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{$app['title']}</title>
+
+    <meta charset="UTF-8">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <meta name="App-Config" content="fullscreen=yes,useHistoryState=yes,transition=yes">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="/static/layui-2.4.5/css/layui.css">
+    <link rel="stylesheet" href="/static/renhe-ui/css/common.css">
+
+    <script src="/static/jquery-1.11.min.js"></script>
+    <script src="/static/layui-2.4.5/layui.all.js"></script>
+    <script src="/static/vue.min.js"></script>
+    <script src="/static/axios.min.js"></script>
+    <script src="/static/renhe-ui/data/base_data.js"></script>
+    <script src="/static/renhe-ui/js/const.js"></script>
+    <script src="/static/renhe-ui/js/common.js"></script>
+    <script src="/static/renhe-ui/js/base_vue.js"></script>
+
+    {if condition="'1' == $app['is_mobile']"}
+    <link rel="stylesheet" href="/static/vant-2.1.4/index.css">
+    <script src="/static/vant-2.1.4/vant.min.js"></script>
+    {else}
+    <link rel="stylesheet" href="/static/element-ui-2.12.0/lib/theme-chalk/index.css">
+    <script src="/static/element-ui-2.12.0/lib/index.js"></script>
+    <script src="/static/ueditor-1.4.3/ueditor.config.js"></script>
+    <script src="/static/ueditor-1.4.3/ueditor.all.js"></script>
+    {/if}
+</head>
+
+<body>
+{__CONTENT__}
+</body>
+</html>

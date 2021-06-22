@@ -1,0 +1,115 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 站点后台 > 商品 > 列表
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-row class="el-tool-bar">
+        <el-col :span="6">
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+                <el-breadcrumb-item>{{breadcrumb.first_role_rule_name}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{breadcrumb.second_role_rule_name}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{breadcrumb.third_role_rule_name}}</el-breadcrumb-item>
+            </el-breadcrumb>
+        </el-col>
+        <el-col :span="12">
+            <el-form @submit.native.prevent>
+                <el-row :gutter="5">
+                    <el-col span="3">
+                        <el-select ref="search_is_pass" placeholder="全部" size="mini" v-model="search_default_data.is_pass">
+                            <el-option value="" label="全部"></el-option>
+                            <el-option value="1" label="已审核"></el-option>
+                            <el-option value="0" label="未审核"></el-option>
+                        </el-select>
+                    </el-col>
+                    <el-col span="15">
+                        <el-input ref="search_keyword" size="mini" placeholder="请输入商品名称" maxlength="20" show-word-limit="true" clearable="true" v-model="search_default_data.keyword"></el-input>
+                    </el-col>
+                    <el-col span="2" class="padding_top_5 center_align">
+                        <el-checkbox ref="search_is_commend" v-model="search_default_data.is_commend">推荐</el-checkbox>
+                    </el-col>
+                    <el-col span="4">
+                        {:search_data_button()}
+                    </el-col>
+                </el-row>
+            </el-form>
+        </el-col>
+        <el-col :span="6" class="right_align padding_right_10">
+            {:site_insert_button('95%', '95%')}
+            {:reload_data_button()}
+        </el-col>
+    </el-row>
+
+    <el-container>
+        <el-aside ref="aside_tree" class="width_200 margin_top_5">
+            <el-tree ref="search_product_class_id" node-key="id" default-expand-all="true" highlight-current="true" :check-strictly="false" :expand-on-click-node="false" :data="product_class_siter_pass_tree" @node-click="search_data()"></el-tree>
+        </el-aside>
+        <el-main class="padding_0">
+            <el-table ref="main_table" size="mini" border="true" stripe="true" highlight-current-row="true" cell-class-name="center_align" :max-height="table_max_height" @row-click="click_current_row">
+                <el-table-column label="ID" prop="id" width="50"></el-table-column>
+                <el-table-column label="商品名称">
+                    <template slot-scope="scope">
+                        <div class="left_align">
+                            <el-link :href="'/product_detail' + scope.row.id + '.html'" target="_blank" v-html="highlight_keyword(scope.row.product_name)"></el-link>
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column label="商品分类" prop="FirstProductClass.product_class_name" width="150"></el-table-column>
+                <el-table-column label="商品小类" prop="SecondProductClass.product_class_name" width="150"></el-table-column>
+<!--                <el-table-column label="市场价" prop="mark_price" width="100"></el-table-column>-->
+<!--                <el-table-column label="站内价" prop="site_price" width="100"></el-table-column>-->
+                <el-table-column label="缩略图" width="80">
+                    <template slot-scope="scope">
+                        <el-image class="hand_cursor width_20 height_20" :src="scope.row.image" v-if="scope.row.image !== ''" @click="show_image(scope.row.image)"></el-image>
+                    </template>
+                </el-table-column>
+                <el-table-column label="推荐" width="100">
+                    <template slot-scope="scope">
+                        {:site_update_is_commend_button()}
+                    </template>
+                </el-table-column>
+                <el-table-column label="审核" width="100">
+                    <template slot-scope="scope">
+                        {:site_update_is_pass_button()}
+                    </template>
+                </el-table-column>
+                <el-table-column label="操作" width="180">
+                    <template slot-scope="scope">
+                        {:site_update_button('95%', '95%')}
+                        {:site_delete_data_button()}
+                    </template>
+                </el-table-column>
+            </el-table>
+
+            <div class="pc_table_footer_bar right_align">
+                {:page_bar()}
+            </div>
+        </el-main>
+    </el-container>
+</div>
+
+<script src="/static/renhe-ui/data/role_rule_data.js"></script>
+<script src="/static/renhe-ui/data/product_class_data.js"></script>
+<script src="/static/renhe-ui/data/product_data.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                breadcrumb: role_rule_data.get_breadcrumb(),
+                main_page: product_data.get_site_any_page(),
+                search_default_data: product_data.get_search_default_data(),
+                product_class_siter_pass_tree: product_class_data.get_site_pass_tree()
+            }
+        },
+        watch: {
+            is_init_data() {
+                setTimeout(() => {
+                    this.$refs.search_product_class_id.setCurrentKey(0);
+                }, 100);
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

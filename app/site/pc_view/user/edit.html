@@ -1,0 +1,52 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 站点后台 > 会员 > 修改
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-form class="padding_20" label-width="100px" @submit.native.prevent>
+        <el-form-item label="用户名">
+            <el-input disabled v-model="main_detail.username"></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+            <el-input type="password" placeholder="请输入密码" maxlength="20" show-word-limit="true" clearable="true" v-model="main_detail.password"></el-input>
+            <el-alert type="warning" title="不修改密码 请留空" show-icon="true" :closable="false" v-show="main_detail.id > 0"></el-alert>
+        </el-form-item>
+        <el-form-item label="姓名">
+            <el-input placeholder="请输入姓名" maxlength="20" show-word-limit="true" clearable="true" v-model="main_detail.realname"></el-input>
+        </el-form-item>
+        <el-form-item label="电话">
+            <el-input placeholder="请输入电话" maxlength="20" show-word-limit="true" clearable="true" v-model="main_detail.tel"></el-input>
+        </el-form-item>
+        <el-form-item label="省市县">
+            <el-cascader placeholder="请选择省市县" clearable="true" :options="city_pass_cascader" :props="{expandTrigger: 'hover'}" v-model="main_detail.city_ids_json" style="width: 100%;"></el-cascader>
+        </el-form-item>
+        <el-form-item label="详细地址">
+            <el-input placeholder="请输入详细地址" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.address"></el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-switch active-text="审核" v-model="main_detail.is_pass"></el-switch>
+        </el-form-item>
+
+        <div class="pc_bottom_button_bar">
+            {:close_button()}
+            {:site_save_data_button()}
+        </div>
+    </el-form>
+</div>
+
+<script src="/static/renhe-ui/data/user_data.js"></script>
+<script src="/static/renhe-ui/json/city_pass_cascader_json.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                city_pass_cascader: city_pass_cascader_json,
+                main_detail: user_data.get_site_any_detail('{$id}')
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

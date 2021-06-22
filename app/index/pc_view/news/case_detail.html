@@ -1,0 +1,63 @@
+<!-- 轮播图 -->
+<div class="swiper-container swiper-container1">
+    <div class="swiper-wrapper">
+        {swiper:image_list id='8'}
+            <div class="swiper-slide">
+                <img src="{$value['image']}" class="pc_banner">
+            </div>
+        {/swiper:image_list}
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+
+<!--面包屑-->
+<ul class="wrap navigation">
+    <li class="rotateInDownLeft animated wow">
+        <img src="/app/index/pc_view/image/address2.png" alt="地标"/>
+        当前位置：
+    </li>
+    <li class="rotateInDownLeft animated wow">
+        <a href="/" class="selectText">首页</a> >
+    </li>
+    <li class="rotateInDownLeft animated wow">
+        <a href="{:news_list_url(3)}" class="selectText">工程案例</a> >
+    </li>
+    <li class="rotateInDownLeft animated wow">
+        <span class="selectText">{$main_detail['news_name']}</span>
+    </li>
+</ul>
+
+<div class="detail-wrap solution-wrap wrap">
+    <div class="left">
+        <img src="{$main_detail['image']}" alt="">
+    </div>
+    <div class="right">
+        <h3>{$main_detail['news_name']}</h3>
+        <h6>项目地点:</h6>
+        <p>{$main_detail['gong_neng']}</p>
+        <h6>实施时间:</h6>
+        <p>{$main_detail['fan_wei']}</p>
+        <!--
+        <h6>订货范例:</h6>
+        <p>{$main_detail['fan_li']}</p>
+        -->
+    </div>
+</div>
+
+<ul class="wrap switchProduct switch_tab">
+    <li onclick="set_tab(0)" class="switchCheck">项目简介</li>
+    <li onclick="set_tab(1)">系统实现功能</li>
+<!--    <li onclick="set_tab(2)">外形尺寸</li>-->
+<!--    <li onclick="set_tab(3)">产品报价</li>-->
+</ul>
+<ul class="detail product-detail tab_content" style="width: 1200px; margin: auto; padding: 20px;">
+    <li id="detail_content">{$main_detail['content']|raw}</li>
+    <li id="detail_xuan_xing">{$main_detail['xuan_xing']|raw}</li>
+<!--    <li id="detail_chi_cun">{$main_detail['chi_cun']|raw}</li>-->
+<!--    <li id="detail_bao_jia">{$main_detail['bao_jia']|raw}</li>-->
+</ul>
+
+<script>
+    set_nav(0); //设置 导航
+    set_tab(0); //切换标签
+</script>

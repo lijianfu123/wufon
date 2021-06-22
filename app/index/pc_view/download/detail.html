@@ -1,0 +1,117 @@
+<style>
+    .switchCheck {
+        background: rgba(5, 162, 95, 1);
+        border-radius: 10px 10px 0px 0px;
+        color: #fff;
+    }
+
+    .asideDown {
+        width: 30%;
+        /* display: flex; */
+        text-align: center;
+    }
+
+    .asideDown h3,
+    .asideDown {
+        border: 1px solid #05a25f;
+    }
+
+    .asideDown h3 {
+        font-size: 14px;
+        padding: 8px 0;
+        width: 100%;
+        background: #05a25f;
+        color: #fff;
+        /* box-shadow: 1px 1px 6px 0px #04683d;
+        border-radius: 3px; */
+    }
+
+    .asideDown li a {
+        font-size: 12px;
+        width: 100%;
+        display: block;
+        /* padding: 9px 0px; */
+        text-align: left;
+        text-indent: 14px;
+        margin-top: 7px;
+        color: #05a25f;
+    }
+
+    @media(max-width: 750px) {
+        .asideDown {
+            width: 90%;
+            /* display: flex; */
+            margin: 0 auto;
+            margin-top: -15px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+    }
+</style>
+
+<!-- 轮播图 -->
+<div class="swiper-container swiper-container1">
+    <div class="swiper-wrapper">
+        {swiper:image_list id='6'}
+        <div class="swiper-slide">
+            <img src="{$value['image']}" class="pc_banner">
+        </div>
+        {/swiper:image_list}
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+
+<!--面包屑-->
+<ul class="wrap navigation" style="margin: 10px auto;">
+    <li class="rotateInDownLeft animated wow">
+        <img src="/app/index/pc_view/image/address2.png" alt="地标"/>
+        当前位置：
+    </li>
+    <li class="rotateInDownLeft animated wow">
+        <a href="/" class="selectText">首页</a> >
+    </li>
+    <li class="rotateInDownLeft animated wow">
+        <span class="selectText">下载中心</span>
+    </li>
+</ul>
+
+<div class="detail-wrap solution-wrap wrap" style="padding: 18px 0;">
+    <ul class="asideDown" style="padding-bottom: 10px; width: 243px !important;">
+        <h3>下载中心</h3>
+        {download_class:list }
+            <li>
+                <a href="{$value['download_list_url']}">{$value['download_class_name']}</a>
+            </li>
+            <!--
+            {php}$download_class = (new app\common\model\DownloadClassModel())->where("parent_id = " . $value['id'])->order('sort asc')->select();{/php}
+            {volist name="$download_class" id="val"}
+                <li style="padding-left: 30px;">
+                    <a href="{:url('list', ['download_class_id' => $val['id']])}">{$val['download_class_name']}</a>
+                </li>
+            {/volist}
+            -->
+        {/download_class:list}
+    </ul>
+    <div class="right rotateInDownLeft animated wow" style="width: 920px;">
+        <div>
+            <div style="float: left; width: 920px;">
+                <h3 style="font-size: 20px; text-align: center;">{$main_detail['download_name']}</h3>
+            </div>
+            <div style="float: left;">
+                {if condition="$main_detail['file_url'] != ''"}
+                    <button onclick="window.open('{:url("download?id=" . $main_detail.id)}')" style="background: #05A25F; padding: 10px; border: 0; color: white; border-radius: 5px;">
+                        {if condition="(substr($main_detail['file_url'], -3) == 'rar') || (substr($main_detail['file_url'], -3) == 'zip')"}下载{else}下载{/if}
+                    </button>
+                {/if}
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+        <p style="margin-top: 20px;">
+            {$main_detail['content']|raw}
+        </p>
+    </div>
+</div>
+
+<script>
+    set_nav(5); //设置 导航
+</script>

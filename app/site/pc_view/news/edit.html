@@ -1,0 +1,205 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 站点后台 > 新闻 > 添加、修改
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-form class="padding_20" label-width="100px" @submit.native.prevent>
+        <el-tabs v-model="tabs_active">
+            <el-tab-pane label="内容管理" name="first_tab">
+                <el-form-item label="所属分类">
+                    <el-select v-model="main_detail.first_news_class_id" @change="main_detail.second_news_class_id = 0; set_param_name(main_detail.first_news_class_id);">
+                        <el-option v-for="news_class in news_class_siter_pass_option" v-if="news_class.level === 1" :label="news_class.news_class_name" :value="news_class.id"></el-option>
+                    </el-select>
+                    <!--
+                    <el-select v-model="main_detail.second_news_class_id">
+                        <el-option v-for="news_class in news_class_siter_pass_option" v-if="(news_class.id === 0) || ((news_class.level === 2) && (news_class.parent_id === main_detail.first_news_class_id))" :label="news_class.news_class_name" :value="news_class.id"></el-option>
+                    </el-select>
+                    -->
+                </el-form-item>
+                <el-form-item label="标题" :required="true">
+                    <el-input placeholder="请输入标题" maxlength="200" show-word-limit="true" clearable="true" v-model="main_detail.news_name"></el-input>
+                </el-form-item>
+                <el-form-item label="标题_eng" :required="true">
+                    <el-input placeholder="请输入标题" maxlength="200" show-word-limit="true" clearable="true" v-model="main_detail.news_name_eng"></el-input>
+                </el-form-item>
+                <el-form-item :label="gong_neng_name" v-if="main_detail.first_news_class_id > 0">
+                    <el-input type="textarea" :rows="5" placeholder="" maxlength="2000" show-word-limit="true" clearable="true" v-model="main_detail.gong_neng"></el-input>
+                </el-form-item>
+                <el-form-item :label="fan_wei_name" v-if="main_detail.first_news_class_id > 0">
+                    <el-input type="textarea" :rows="5" placeholder="" maxlength="2000" show-word-limit="true" clearable="true" v-model="main_detail.fan_wei"></el-input>
+                </el-form-item>
+
+                <!--
+                <el-form-item label="订货范例">
+                    <el-input placeholder="" maxlength="2000" show-word-limit="true" clearable="true" v-model="main_detail.fan_li"></el-input>
+                </el-form-item>
+                -->
+                <el-form-item label="图片">
+                    <el-col :span="2">
+                        <el-upload ref="upload_image" action="{:upload_url()}" accept="image/*" :show-file-list="false" :disabled="is_disabled_upload_button" :before-upload="before_upload" :on-success="upload_file()">
+                            <el-button type="success" class="el-icon-upload" :disabled="is_disabled_upload_button" :loading="is_loading_upload_button">点击上传</el-button>
+                        </el-upload>
+                    </el-col>
+                    <el-col :span="2">
+                        <el-image class="hand_cursor width_40 height_40" :src="main_detail.image" v-if="(main_detail.image !== undefined) && (main_detail.image !== '')" @click="show_image(main_detail.image)"></el-image>
+                    </el-col>
+                    <el-alert type="warning" title="请上传 jpg、gif、png（RGB 格式）图片，且文件的大小不超过 200K" show-icon="true" :closable="false">
+                        宽度：{{site_detail.news_image_width}}像素<span class="padding_left_20">高度：{{site_detail.news_image_height}}像素</span>
+                    </el-alert>
+                </el-form-item>
+
+                <el-form-item label="图标">
+                    <el-col :span="2">
+                        <el-upload ref="upload_icon" action="{:upload_url()}" accept="image/*" :show-file-list="false" :disabled="is_disabled_upload_button" :before-upload="before_upload" :on-success="upload_file('icon')">
+                            <el-button type="success" class="el-icon-upload" :disabled="is_disabled_upload_button" :loading="is_loading_upload_button">点击上传</el-button>
+                        </el-upload>
+                    </el-col>
+                    <el-col :span="2">
+                        <el-image class="hand_cursor width_40 height_40" :src="main_detail.icon" v-if="(main_detail.icon !== undefined) && (main_detail.icon !== '')" @click="show_image(main_detail.icon)"></el-image>
+                    </el-col>
+                    <el-alert type="warning" title="请上传 jpg、gif、png（RGB 格式）图片，且文件的大小不超过 200K" show-icon="true" :closable="false">
+                        宽度：200像素<span class="padding_left_20">高度：200像素</span>
+                    </el-alert>
+                </el-form-item>
+                <el-form-item label="图标_鼠标经过">
+                    <el-col :span="2">
+                        <el-upload ref="upload_icon_2" action="{:upload_url()}" accept="image/*" :show-file-list="false" :disabled="is_disabled_upload_button" :before-upload="before_upload" :on-success="upload_file('icon_2')">
+                            <el-button type="success" class="el-icon-upload" :disabled="is_disabled_upload_button" :loading="is_loading_upload_button">点击上传</el-button>
+                        </el-upload>
+                    </el-col>
+                    <el-col :span="2">
+                        <el-image class="hand_cursor width_40 height_40" :src="main_detail.icon_2" v-if="(main_detail.icon_2 !== undefined) && (main_detail.icon_2 !== '')" @click="show_image(main_detail.icon_2)"></el-image>
+                    </el-col>
+                    <el-alert type="warning" title="请上传 jpg、gif、png（RGB 格式）图片，且文件的大小不超过 200K" show-icon="true" :closable="false">
+                        宽度：200像素<span class="padding_left_20">高度：200像素</span>
+                    </el-alert>
+                </el-form-item>
+
+                <el-form-item>
+                    <el-switch active-text="审核" v-model="main_detail.is_pass"></el-switch>
+                    <span class="padding_left_20">
+                        <el-switch active-text="推荐" v-model="main_detail.is_commend"></el-switch>
+                    </span>
+                </el-form-item>
+                <el-form-item label="" v-show="main_detail.first_news_class_id > 0">
+                    <el-tabs type="border-card" v-model="tabs_content_active">
+                        <el-tab-pane :label="content_name" name="first_content_tab" v-show="main_detail.first_news_class_id > 0">
+                            <textarea id="content" ref="editor" v-model="main_detail.content"></textarea>
+                        </el-tab-pane>
+                        <el-tab-pane :label="xuan_xing_name" name="second_content_tab" v-show="main_detail.first_news_class_id > 0">
+                            <textarea id="xuan_xing" ref="editor_xuan_xing" v-model="main_detail.xuan_xing"></textarea>
+                        </el-tab-pane>
+                        <el-tab-pane :label="chi_cun_name" name="third_content_tab" v-show="main_detail.first_news_class_id === 1 || main_detail.first_news_class_id === 2">
+                            <textarea id="chi_cun" ref="editor_chi_cun" v-model="main_detail.chi_cun"></textarea>
+                        </el-tab-pane>
+                        <el-tab-pane :label="bao_jia_name" name="fourth_content_tab" v-show="main_detail.first_news_class_id === 2">
+                            <textarea id="bao_jia" ref="editor_bao_jia" v-model="main_detail.bao_jia"></textarea>
+                        </el-tab-pane>
+                    </el-tabs>
+                </el-form-item>
+
+                <!--
+                <el-form-item :label="content_name" v-show="main_detail.first_news_class_id > 0">
+                    <textarea id="content" ref="editor" v-model="main_detail.content"></textarea>
+                </el-form-item>
+                <el-form-item :label="xuan_xing_name" v-show="main_detail.first_news_class_id > 0">
+                    <textarea id="xuan_xing" ref="editor_xuan_xing" v-model="main_detail.xuan_xing"></textarea>
+                </el-form-item>
+                <el-form-item :label="chi_cun_name" v-show="main_detail.first_news_class_id === 1 || main_detail.first_news_class_id === 2">
+                    <textarea id="chi_cun" ref="editor_chi_cun" v-model="main_detail.chi_cun"></textarea>
+                </el-form-item>
+                <el-form-item :label="bao_jia_name" v-show="main_detail.first_news_class_id === 2">
+                    <textarea id="bao_jia" ref="editor_bao_jia" v-model="main_detail.bao_jia"></textarea>
+                </el-form-item>
+                -->
+                <div class="height_50"></div>
+            </el-tab-pane>
+            <el-tab-pane label="SEO 设置" name="second_tab">
+                <el-form-item label="title">
+                    <el-input placeholder="请输入 title" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.title"></el-input>
+                    <el-alert type="warning" title="留空 为 ‘新闻标题’" show-icon="true" :closable="false"></el-alert>
+                </el-form-item>
+                <el-form-item label="keywords">
+                    <el-input placeholder="请输入 keywords" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.keywords"></el-input>
+                </el-form-item>
+                <el-form-item label="description">
+                    <el-input placeholder="请输入 description" maxlength="100" show-word-limit="true" clearable="true" v-model="main_detail.description"></el-input>
+                </el-form-item>
+            </el-tab-pane>
+        </el-tabs>
+
+        <div class="pc_bottom_button_bar">
+            {:close_button()}
+            {:site_save_data_button()}
+        </div>
+    </el-form>
+</div>
+
+<script src="/static/renhe-ui/data/site_data.js"></script>
+<script src="/static/renhe-ui/data/news_data.js"></script>
+<script src="/static/renhe-ui/data/news_class_data.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                gong_neng_name: '',
+                fan_wei_name: '',
+                //fan_li_name: '',
+
+                content_name: '',
+                xuan_xing_name: '',
+                chi_cun_name: '',
+                bao_jia_name: '',
+
+                main_detail: news_data.get_site_any_detail('{$id}'),
+                news_class_siter_pass_option: news_class_data.get_site_pass_option(),
+                site_detail: site_data.get_site_any_detail('{$siter_login_detail["site_id"]}')
+            }
+        },
+        mounted() {
+            setTimeout(()=>{
+                this.set_param_name(this.main_detail.first_news_class_id);
+            }, 2000);
+        },
+        methods: {
+            set_param_name(first_news_class_id = 0) {
+                switch (first_news_class_id) {
+                    case 1: //解决方案
+                        this.gong_neng_name = '系统功能';
+                        this.fan_wei_name = '应用场所';
+
+                        this.content_name = '技术参数';
+                        this.xuan_xing_name = '系统功能';
+                        this.chi_cun_name = '设备选型';
+                        this.bao_jia_name = '';
+
+                        break;
+                    case 2: //云平台
+                        this.gong_neng_name = '平台功能';
+                        this.fan_wei_name = '应用场所';
+
+                        this.content_name = '云平台结构';
+                        this.xuan_xing_name = '云平台功能';
+                        this.chi_cun_name = '云平台配置';
+                        this.bao_jia_name = '业务模式';
+
+                        break;
+                    case 3: //工程案例
+                        this.gong_neng_name = '项目地点';
+                        this.fan_wei_name = '实施时间';
+
+                        this.content_name = '项目简介';
+                        this.xuan_xing_name = '系统实现功能';
+                        this.chi_cun_name = '';
+                        this.bao_jia_name = '';
+
+                        break;
+                }
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

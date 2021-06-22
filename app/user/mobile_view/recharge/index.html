@@ -1,0 +1,33 @@
+<!--
+-+--------------------------------------------------
+-| 手机端
+-| 会员中心 > 充值 > 列表
+-+--------------------------------------------------
+-->
+<div id="app">
+    <van-nav-bar ref="nav_bar" title="充值记录" left-arrow @click-left="back()"></van-nav-bar>
+
+    <van-list>
+        <van-cell title="￥100" value="2019-08-26 18:08:08"></van-cell>
+        <van-cell title="￥100" value="2019-08-26 18:08:08"></van-cell>
+        <van-cell title="￥100" value="2019-08-26 18:08:08"></van-cell>
+    </van-list>
+
+    <div class="mobile_bottom_button_bar">
+        <van-button type="danger" icon="plus" size="small" block>充值</van-button>
+    </div>
+
+    {include file="recharge/edit"}
+</div>
+
+<script>
+    let vue_param = {
+        data() {
+            return {
+                pay_type: PAY_TYPE_ENUM.wechat.code.toString()
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

@@ -1,0 +1,32 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 后台管理 > 站点 > 添加、修改
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-form class="padding_20" label-width="150px" @submit.native.prevent>
+        {include file="../../common/view/site"}
+
+        <div class="pc_bottom_button_bar">
+            {:close_button()}
+            {:admin_save_data_button()}
+            <el-switch active-text="审核" v-model="main_detail.is_pass"></el-switch>
+        </div>
+    </el-form>
+</div>
+
+<script src="/static/renhe-ui/data/site_data.js"></script>
+<script src="/static/renhe-ui/json/city_pass_cascader_json.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                city_pass_cascader: city_pass_cascader_json,
+                main_detail: site_data.get_any_detail('{$id}')
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

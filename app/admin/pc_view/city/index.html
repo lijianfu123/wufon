@@ -1,0 +1,75 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 后台管理 > 省 / 市 / 县 > 列表
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-row class="el-tool-bar">
+        <el-col :span="6">
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+                <el-breadcrumb-item>{{breadcrumb.first_role_rule_name}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{breadcrumb.second_role_rule_name}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{breadcrumb.third_role_rule_name}}</el-breadcrumb-item>
+            </el-breadcrumb>
+        </el-col>
+        <el-col :span="18" class="right_align padding_right_10">
+            {:admin_insert_button(600, 400)}
+            {:admin_update_sort_button()}
+            {:reload_data_button()}
+        </el-col>
+    </el-row>
+
+    <el-table ref="main_table" size="mini" border="true" stripe="true" highlight-current-row="true" row-key="id" lazy="true" :max-height="table_max_height" :load="get_any_children_level_tree_list" @row-click="click_current_row">
+        <el-table-column label="省市县" prop="city_name"></el-table-column>
+        <el-table-column label="ID" prop="id" width="100" class-name="center_align"></el-table-column>
+        <el-table-column label="行政编码" prop="city_code" width="200" class-name="center_align"></el-table-column>
+        <el-table-column label="省份排序" width="100" class-name="center_align">
+            <template slot-scope="scope">
+                <div v-show="scope.row.level === 1">
+                    {:admin_sort_input()}
+                </div>
+            </template>
+        </el-table-column>
+        <el-table-column label="城市排序" width="100" class-name="center_align">
+            <template slot-scope="scope">
+                <div v-show="scope.row.level === 2">
+                    {:admin_sort_input()}
+                </div>
+            </template>
+        </el-table-column>
+        <el-table-column label="区县排序" width="100" class-name="center_align">
+            <template slot-scope="scope">
+                <div v-show="scope.row.level === 3">
+                    {:admin_sort_input()}
+                </div>
+            </template>
+        </el-table-column>
+        <el-table-column label="审核" width="100" class-name="center_align">
+            <template slot-scope="scope">
+                {:admin_update_is_pass_button()}
+            </template>
+        </el-table-column>
+        <el-table-column label="操作" width="180" class-name="center_align">
+            <template slot-scope="scope">
+                {:admin_update_button(600, 400)}
+                {:admin_delete_data_button()}
+            </template>
+        </el-table-column>
+    </el-table>
+</div>
+
+<script src="/static/renhe-ui/data/role_rule_data.js"></script>
+<script src="/static/renhe-ui/data/city_data.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                breadcrumb: role_rule_data.get_breadcrumb(),
+                main_list: city_data.get_any_first_level_tree_list()
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

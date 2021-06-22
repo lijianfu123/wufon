@@ -1,0 +1,127 @@
+<!--
+-+--------------------------------------------------
+-| 手机端
+-| 购物车 > 首页
+-+--------------------------------------------------
+-->
+<div id="app">
+    <van-nav-bar ref="nav_bar" title="购物车-商品" left-arrow @click-left="back()"></van-nav-bar>
+
+    <!--商品列表-->
+    <van-list>
+        <van-cell>
+            <van-row class="cart_list">
+                <van-col span="2">
+                    <van-checkbox v-model="main_detail.id"></van-checkbox>
+                </van-col>
+                <van-col span="4" class="center_align">
+                    <van-image width="35" height="35" src="https://img.yzcdn.cn/vant/cat.jpeg" class="margin_top_5"></van-image>
+                </van-col>
+                <van-col span="18" class="padding_5">
+                    <van-row>
+                        南极人网红暖水袋南极人网红暖水袋南极人网红暖水袋南极人网红暖水袋
+                    </van-row>
+                    <van-row class="gray padding_bottom_5">
+                        <van-col span="12">
+                            规格：<span class="red">500ml</span>
+                        </van-col>
+                        <van-col span="12" class="right_align">
+                            单价：<span class="red">￥5.10/瓶</span>
+                        </van-col>
+                    </van-row>
+                    <van-row>
+                        <van-col span="16">
+                            <van-stepper v-model="main_detail.id" step="1"></van-stepper>
+                        </van-col>
+                        <van-col span="8" class="right_align">
+                            <van-button type="danger" icon="delete" size="small" min="1">删除</van-button>
+                        </van-col>
+                    </van-row>
+                </van-col>
+            </van-row>
+
+            <van-row class="cart_list">
+                <van-col span="2">
+                    <van-checkbox v-model="main_detail.id"></van-checkbox>
+                </van-col>
+                <van-col span="4" class="center_align">
+                    <van-image width="35" height="35" src="https://img.yzcdn.cn/vant/cat.jpeg" class="margin_top_5"></van-image>
+                </van-col>
+                <van-col span="18" class="padding_5">
+                    <van-row>
+                        南极人网红暖水袋南极人网红暖水袋南极人网红暖水袋南极人网红暖水袋
+                    </van-row>
+                    <van-row class="gray padding_bottom_5">
+                        <van-col span="12">
+                            规格：<span class="red">500ml</span>
+                        </van-col>
+                        <van-col span="12" class="right_align">
+                            单价：<span class="red">￥5.10/瓶</span>
+                        </van-col>
+                    </van-row>
+                    <van-row>
+                        <van-col span="16">
+                            <van-stepper v-model="main_detail.id" step="1" min="1"></van-stepper>
+                        </van-col>
+                        <van-col span="8" class="right_align">
+                            <van-button type="danger" icon="delete" size="small">删除</van-button>
+                        </van-col>
+                    </van-row>
+                </van-col>
+            </van-row>
+
+            <van-row class="cart_list">
+                <van-col span="2">
+                    <van-checkbox v-model="main_detail.id"></van-checkbox>
+                </van-col>
+                <van-col span="4" class="center_align">
+                    <van-image width="35" height="35" src="https://img.yzcdn.cn/vant/cat.jpeg" class="margin_top_5"></van-image>
+                </van-col>
+                <van-col span="18" class="padding_5">
+                    <van-row>
+                        南极人网红暖水袋南极人网红暖水袋南极人网红暖水袋南极人网红暖水袋
+                    </van-row>
+                    <van-row class="gray padding_bottom_5">
+                        <van-col span="12">
+                            规格：<span class="red">500ml</span>
+                        </van-col>
+                        <van-col span="12" class="right_align">
+                            单价：<span class="red">￥5.10/瓶</span>
+                        </van-col>
+                    </van-row>
+                    <van-row>
+                        <van-col span="16">
+                            <van-stepper v-model="main_detail.id" step="1" min="1"></van-stepper>
+                        </van-col>
+                        <van-col span="8" class="right_align">
+                            <van-button type="danger" icon="delete" size="small">删除</van-button>
+                        </van-col>
+                    </van-row>
+                </van-col>
+            </van-row>
+        </van-cell>
+    </van-list>
+
+    <van-submit-bar ref="submit_bar" :price="3050" button-text="提交订单" @submit="onSubmit">
+        <span class="padding_left_10">
+            <van-checkbox v-model="checked">全选</van-checkbox>
+        </span>
+    </van-submit-bar>
+</div>
+
+<script>
+    let vue_param = {
+        data() {
+            return {
+                checked: false
+            }
+        },
+        methods: {
+            onSubmit() {
+                location.href = '{:cart_cashier_url()}';
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

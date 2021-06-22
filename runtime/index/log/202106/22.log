@@ -1,0 +1,195 @@
+[2021-06-22T14:37:32+08:00][error] [1045]SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+[2021-06-22T14:38:37+08:00][sql] CONNECT:[ UseTime:0.039581s ] mysql:host=47.102.153.100;port=3306;dbname=an_ke_rui;charset=utf8
+[2021-06-22T14:38:37+08:00][sql] SHOW FULL COLUMNS FROM `rh_site` [ RunTime:0.024735s ]
+[2021-06-22T14:38:37+08:00][sql] SELECT * FROM `rh_site` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_site`.`delete_time` = 0 LIMIT 1 [ RunTime:0.024296s ]
+[2021-06-22T14:38:37+08:00][sql] SHOW FULL COLUMNS FROM `rh_news` [ RunTime:0.026853s ]
+[2021-06-22T14:38:37+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 1 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.022539s ]
+[2021-06-22T14:38:37+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 2 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.030135s ]
+[2021-06-22T14:38:37+08:00][sql] SHOW FULL COLUMNS FROM `rh_product_class` [ RunTime:0.026731s ]
+[2021-06-22T14:38:37+08:00][sql] SELECT * FROM `rh_product_class` WHERE (  `is_pass` = 1 ) AND `rh_product_class`.`delete_time` = 0 ORDER BY `sort` ASC,`id` ASC [ RunTime:0.026514s ]
+[2021-06-22T14:38:37+08:00][sql] SELECT * FROM `rh_news` WHERE (  ( is_pass = 1 and first_news_class_id = 1 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC [ RunTime:0.040916s ]
+[2021-06-22T14:38:37+08:00][sql] SELECT * FROM `rh_news` WHERE (  ( is_pass = 1 and first_news_class_id = 2 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC [ RunTime:0.036548s ]
+[2021-06-22T14:38:37+08:00][sql] SHOW FULL COLUMNS FROM `rh_download_class` [ RunTime:0.024211s ]
+[2021-06-22T14:38:37+08:00][sql] SELECT * FROM `rh_download_class` WHERE (  ( is_pass = 1 ) ) AND `rh_download_class`.`delete_time` = 0 ORDER BY `sort` ASC [ RunTime:0.027518s ]
+[2021-06-22T14:38:37+08:00][sql] SHOW FULL COLUMNS FROM `rh_swiper` [ RunTime:0.025829s ]
+[2021-06-22T14:38:37+08:00][sql] SELECT * FROM `rh_swiper` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_swiper`.`delete_time` = 0 LIMIT 1 [ RunTime:0.020438s ]
+[2021-06-22T14:38:37+08:00][sql] SHOW FULL COLUMNS FROM `rh_intro` [ RunTime:0.036071s ]
+[2021-06-22T14:38:37+08:00][sql] SELECT * FROM `rh_intro` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_intro`.`delete_time` = 0 LIMIT 1 [ RunTime:0.023011s ]
+[2021-06-22T14:38:37+08:00][sql] SELECT * FROM `rh_news` WHERE (  ( (is_pass = 1) and (is_commend = 1) and (delete_time = 0) and (first_news_class_id = 1) ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `id` DESC LIMIT 5 [ RunTime:0.023538s ]
+[2021-06-22T14:38:37+08:00][sql] SELECT * FROM `rh_news` WHERE (  ( (is_pass = 1) and (is_commend = 1) and (delete_time = 0) and (first_news_class_id = 2) ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `id` DESC LIMIT 5 [ RunTime:0.020262s ]
+[2021-06-22T14:38:37+08:00][sql] SHOW FULL COLUMNS FROM `rh_product` [ RunTime:0.025689s ]
+[2021-06-22T14:38:37+08:00][sql] SELECT * FROM `rh_product` WHERE (  ( (is_pass = 1) and (is_commend = 1) and (delete_time = 0) ) ) AND `rh_product`.`delete_time` = 0 ORDER BY `id` DESC LIMIT 12 [ RunTime:0.030673s ]
+[2021-06-22T14:38:37+08:00][sql] SELECT * FROM `rh_news` WHERE (  ( (is_pass = 1) and (is_commend = 1) and (delete_time = 0) and (first_news_class_id = 3) ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `id` DESC LIMIT 5 [ RunTime:0.024233s ]
+[2021-06-22T14:38:37+08:00][sql] SELECT * FROM `rh_product_class` WHERE (  ( parent_id = 0 ) ) AND `rh_product_class`.`delete_time` = 0 [ RunTime:0.020049s ]
+[2021-06-22T14:38:37+08:00][sql] SELECT * FROM `rh_news` WHERE (  ( (is_pass = 1) and (delete_time = 0) and (first_news_class_id = 1) ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 9 [ RunTime:0.024130s ]
+[2021-06-22T14:38:37+08:00][sql] SELECT * FROM `rh_news` WHERE (  ( (is_pass = 1) and (delete_time = 0) and (first_news_class_id = 2) ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 9 [ RunTime:0.030858s ]
+[2021-06-22T14:38:37+08:00][info] [ VIEW ] D:\ruanjian\phpstudy_pro\WWW\project\ankerui\app\index\pc_view\index\index.html [ array (
+  0 => 'app',
+  1 => 'site_detail',
+  2 => 'main_detail',
+) ]
+[2021-06-22T14:57:04+08:00][sql] CONNECT:[ UseTime:0.032623s ] mysql:host=47.102.153.100;port=3306;dbname=an_ke_rui;charset=utf8
+[2021-06-22T14:57:04+08:00][sql] SHOW FULL COLUMNS FROM `rh_site` [ RunTime:0.034836s ]
+[2021-06-22T14:57:04+08:00][sql] SELECT * FROM `rh_site` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_site`.`delete_time` = 0 LIMIT 1 [ RunTime:0.021338s ]
+[2021-06-22T14:57:04+08:00][sql] SHOW FULL COLUMNS FROM `rh_news` [ RunTime:0.022004s ]
+[2021-06-22T14:57:04+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 1 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.022608s ]
+[2021-06-22T14:57:04+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 2 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.024359s ]
+[2021-06-22T14:57:04+08:00][sql] SHOW FULL COLUMNS FROM `rh_swiper` [ RunTime:0.019435s ]
+[2021-06-22T14:57:04+08:00][sql] SELECT * FROM `rh_swiper` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_swiper`.`delete_time` = 0 LIMIT 1 [ RunTime:0.019233s ]
+[2021-06-22T14:57:04+08:00][sql] SHOW FULL COLUMNS FROM `rh_intro` [ RunTime:0.020735s ]
+[2021-06-22T14:57:04+08:00][sql] SELECT * FROM `rh_intro` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_intro`.`delete_time` = 0 LIMIT 1 [ RunTime:0.019763s ]
+[2021-06-22T14:57:04+08:00][sql] SELECT * FROM `rh_news` WHERE (  ( (is_pass = 1) and (is_commend = 1) and (delete_time = 0) and (first_news_class_id = 1) ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `id` DESC LIMIT 5 [ RunTime:0.024418s ]
+[2021-06-22T14:57:04+08:00][sql] SELECT * FROM `rh_news` WHERE (  ( (is_pass = 1) and (is_commend = 1) and (delete_time = 0) and (first_news_class_id = 2) ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `id` DESC LIMIT 5 [ RunTime:0.020603s ]
+[2021-06-22T14:57:04+08:00][sql] SHOW FULL COLUMNS FROM `rh_product` [ RunTime:0.019447s ]
+[2021-06-22T14:57:04+08:00][sql] SELECT * FROM `rh_product` WHERE (  ( (is_pass = 1) and (is_commend = 1) and (delete_time = 0) ) ) AND `rh_product`.`delete_time` = 0 ORDER BY `id` DESC LIMIT 12 [ RunTime:0.041589s ]
+[2021-06-22T14:57:04+08:00][sql] SELECT * FROM `rh_news` WHERE (  ( (is_pass = 1) and (is_commend = 1) and (delete_time = 0) and (first_news_class_id = 3) ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `id` DESC LIMIT 5 [ RunTime:0.024179s ]
+[2021-06-22T14:57:04+08:00][sql] SHOW FULL COLUMNS FROM `rh_product_class` [ RunTime:0.023697s ]
+[2021-06-22T14:57:04+08:00][sql] SELECT * FROM `rh_product_class` WHERE (  ( parent_id = 0 ) ) AND `rh_product_class`.`delete_time` = 0 [ RunTime:0.022729s ]
+[2021-06-22T14:57:04+08:00][sql] SELECT * FROM `rh_news` WHERE (  ( (is_pass = 1) and (delete_time = 0) and (first_news_class_id = 1) ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 9 [ RunTime:0.025210s ]
+[2021-06-22T14:57:04+08:00][sql] SELECT * FROM `rh_news` WHERE (  ( (is_pass = 1) and (delete_time = 0) and (first_news_class_id = 2) ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 9 [ RunTime:0.030389s ]
+[2021-06-22T14:57:04+08:00][info] [ VIEW ] D:\ruanjian\phpstudy_pro\WWW\project\ankerui\app\index\pc_view\index\index.html [ array (
+  0 => 'app',
+  1 => 'site_detail',
+  2 => 'main_detail',
+) ]
+[2021-06-22T14:57:32+08:00][sql] CONNECT:[ UseTime:0.045219s ] mysql:host=47.102.153.100;port=3306;dbname=an_ke_rui;charset=utf8
+[2021-06-22T14:57:32+08:00][sql] SHOW FULL COLUMNS FROM `rh_site` [ RunTime:0.030951s ]
+[2021-06-22T14:57:32+08:00][sql] SELECT * FROM `rh_site` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_site`.`delete_time` = 0 LIMIT 1 [ RunTime:0.029138s ]
+[2021-06-22T14:57:32+08:00][sql] SHOW FULL COLUMNS FROM `rh_news` [ RunTime:0.033315s ]
+[2021-06-22T14:57:32+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 1 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.024502s ]
+[2021-06-22T14:57:32+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 2 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.024507s ]
+[2021-06-22T14:57:32+08:00][sql] SHOW FULL COLUMNS FROM `rh_swiper` [ RunTime:0.022916s ]
+[2021-06-22T14:57:32+08:00][sql] SELECT * FROM `rh_swiper` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_swiper`.`delete_time` = 0 LIMIT 1 [ RunTime:0.022070s ]
+[2021-06-22T14:57:32+08:00][sql] SHOW FULL COLUMNS FROM `rh_intro` [ RunTime:0.024375s ]
+[2021-06-22T14:57:32+08:00][sql] SELECT * FROM `rh_intro` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_intro`.`delete_time` = 0 LIMIT 1 [ RunTime:0.023887s ]
+[2021-06-22T14:57:32+08:00][sql] SELECT * FROM `rh_news` WHERE (  ( (is_pass = 1) and (is_commend = 1) and (delete_time = 0) and (first_news_class_id = 1) ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `id` DESC LIMIT 5 [ RunTime:0.024855s ]
+[2021-06-22T14:57:32+08:00][sql] SELECT * FROM `rh_news` WHERE (  ( (is_pass = 1) and (is_commend = 1) and (delete_time = 0) and (first_news_class_id = 2) ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `id` DESC LIMIT 5 [ RunTime:0.024728s ]
+[2021-06-22T14:57:32+08:00][sql] SHOW FULL COLUMNS FROM `rh_product` [ RunTime:0.022405s ]
+[2021-06-22T14:57:32+08:00][sql] SELECT * FROM `rh_product` WHERE (  ( (is_pass = 1) and (is_commend = 1) and (delete_time = 0) ) ) AND `rh_product`.`delete_time` = 0 ORDER BY `id` DESC LIMIT 12 [ RunTime:0.051578s ]
+[2021-06-22T14:57:32+08:00][sql] SELECT * FROM `rh_news` WHERE (  ( (is_pass = 1) and (is_commend = 1) and (delete_time = 0) and (first_news_class_id = 3) ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `id` DESC LIMIT 5 [ RunTime:0.025402s ]
+[2021-06-22T14:57:32+08:00][sql] SHOW FULL COLUMNS FROM `rh_product_class` [ RunTime:0.025720s ]
+[2021-06-22T14:57:32+08:00][sql] SELECT * FROM `rh_product_class` WHERE (  ( parent_id = 0 ) ) AND `rh_product_class`.`delete_time` = 0 [ RunTime:0.025054s ]
+[2021-06-22T14:57:32+08:00][sql] SELECT * FROM `rh_news` WHERE (  ( (is_pass = 1) and (delete_time = 0) and (first_news_class_id = 1) ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 9 [ RunTime:0.029459s ]
+[2021-06-22T14:57:32+08:00][sql] SELECT * FROM `rh_news` WHERE (  ( (is_pass = 1) and (delete_time = 0) and (first_news_class_id = 2) ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 9 [ RunTime:0.043134s ]
+[2021-06-22T14:57:32+08:00][info] [ VIEW ] D:\ruanjian\phpstudy_pro\WWW\project\ankerui\app\index\pc_view\index\index.html [ array (
+  0 => 'app',
+  1 => 'site_detail',
+  2 => 'main_detail',
+) ]
+[2021-06-22T15:01:00+08:00][sql] CONNECT:[ UseTime:0.037112s ] mysql:host=47.102.153.100;port=3306;dbname=an_ke_rui;charset=utf8
+[2021-06-22T15:01:00+08:00][sql] SHOW FULL COLUMNS FROM `rh_site` [ RunTime:0.023109s ]
+[2021-06-22T15:01:00+08:00][sql] SELECT * FROM `rh_site` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_site`.`delete_time` = 0 LIMIT 1 [ RunTime:0.019430s ]
+[2021-06-22T15:01:00+08:00][sql] SHOW FULL COLUMNS FROM `rh_news` [ RunTime:0.023502s ]
+[2021-06-22T15:01:00+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 1 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.020133s ]
+[2021-06-22T15:01:00+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 2 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.019470s ]
+[2021-06-22T15:01:00+08:00][sql] SHOW FULL COLUMNS FROM `rh_swiper` [ RunTime:0.028191s ]
+[2021-06-22T15:01:00+08:00][sql] SELECT * FROM `rh_swiper` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_swiper`.`delete_time` = 0 LIMIT 1 [ RunTime:0.018401s ]
+[2021-06-22T15:01:00+08:00][info] [ VIEW ] D:\ruanjian\phpstudy_pro\WWW\project\ankerui\app\index\pc_view\index\index.html [ array (
+  0 => 'app',
+  1 => 'site_detail',
+  2 => 'main_detail',
+) ]
+[2021-06-22T15:03:40+08:00][sql] CONNECT:[ UseTime:0.054570s ] mysql:host=47.102.153.100;port=3306;dbname=an_ke_rui;charset=utf8
+[2021-06-22T15:03:40+08:00][sql] SHOW FULL COLUMNS FROM `rh_site` [ RunTime:0.038934s ]
+[2021-06-22T15:03:40+08:00][sql] SELECT * FROM `rh_site` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_site`.`delete_time` = 0 LIMIT 1 [ RunTime:0.024253s ]
+[2021-06-22T15:03:40+08:00][sql] SHOW FULL COLUMNS FROM `rh_news` [ RunTime:0.026030s ]
+[2021-06-22T15:03:40+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 1 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.026424s ]
+[2021-06-22T15:03:40+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 2 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.021041s ]
+[2021-06-22T15:03:40+08:00][sql] SHOW FULL COLUMNS FROM `rh_swiper` [ RunTime:0.025484s ]
+[2021-06-22T15:03:40+08:00][sql] SELECT * FROM `rh_swiper` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_swiper`.`delete_time` = 0 LIMIT 1 [ RunTime:0.045129s ]
+[2021-06-22T15:03:40+08:00][info] [ VIEW ] D:\ruanjian\phpstudy_pro\WWW\project\ankerui\app\index\pc_view\index\index.html [ array (
+  0 => 'app',
+  1 => 'site_detail',
+  2 => 'main_detail',
+) ]
+[2021-06-22T15:04:02+08:00][sql] CONNECT:[ UseTime:0.037689s ] mysql:host=47.102.153.100;port=3306;dbname=an_ke_rui;charset=utf8
+[2021-06-22T15:04:02+08:00][sql] SHOW FULL COLUMNS FROM `rh_site` [ RunTime:0.022590s ]
+[2021-06-22T15:04:02+08:00][sql] SELECT * FROM `rh_site` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_site`.`delete_time` = 0 LIMIT 1 [ RunTime:0.019930s ]
+[2021-06-22T15:04:02+08:00][sql] SHOW FULL COLUMNS FROM `rh_news` [ RunTime:0.020603s ]
+[2021-06-22T15:04:02+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 1 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.019405s ]
+[2021-06-22T15:04:02+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 2 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.027289s ]
+[2021-06-22T15:04:02+08:00][sql] SHOW FULL COLUMNS FROM `rh_swiper` [ RunTime:0.023703s ]
+[2021-06-22T15:04:02+08:00][sql] SELECT * FROM `rh_swiper` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_swiper`.`delete_time` = 0 LIMIT 1 [ RunTime:0.024153s ]
+[2021-06-22T15:04:02+08:00][info] [ VIEW ] D:\ruanjian\phpstudy_pro\WWW\project\ankerui\app\index\pc_view\index\index.html [ array (
+  0 => 'app',
+  1 => 'site_detail',
+  2 => 'main_detail',
+) ]
+[2021-06-22T15:05:21+08:00][sql] CONNECT:[ UseTime:0.039979s ] mysql:host=47.102.153.100;port=3306;dbname=an_ke_rui;charset=utf8
+[2021-06-22T15:05:21+08:00][sql] SHOW FULL COLUMNS FROM `rh_site` [ RunTime:0.020587s ]
+[2021-06-22T15:05:21+08:00][sql] SELECT * FROM `rh_site` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_site`.`delete_time` = 0 LIMIT 1 [ RunTime:0.020829s ]
+[2021-06-22T15:05:21+08:00][sql] SHOW FULL COLUMNS FROM `rh_news` [ RunTime:0.020546s ]
+[2021-06-22T15:05:21+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 1 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.020556s ]
+[2021-06-22T15:05:21+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 2 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.019933s ]
+[2021-06-22T15:05:21+08:00][sql] SHOW FULL COLUMNS FROM `rh_swiper` [ RunTime:0.018905s ]
+[2021-06-22T15:05:21+08:00][sql] SELECT * FROM `rh_swiper` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_swiper`.`delete_time` = 0 LIMIT 1 [ RunTime:0.022743s ]
+[2021-06-22T15:05:21+08:00][info] [ VIEW ] D:\ruanjian\phpstudy_pro\WWW\project\ankerui\app\index\pc_view\index\index.html [ array (
+  0 => 'app',
+  1 => 'site_detail',
+  2 => 'main_detail',
+) ]
+[2021-06-22T15:06:22+08:00][sql] CONNECT:[ UseTime:0.032011s ] mysql:host=47.102.153.100;port=3306;dbname=an_ke_rui;charset=utf8
+[2021-06-22T15:06:22+08:00][sql] SHOW FULL COLUMNS FROM `rh_site` [ RunTime:0.044881s ]
+[2021-06-22T15:06:22+08:00][sql] SELECT * FROM `rh_site` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_site`.`delete_time` = 0 LIMIT 1 [ RunTime:0.022833s ]
+[2021-06-22T15:06:22+08:00][sql] SHOW FULL COLUMNS FROM `rh_news` [ RunTime:0.020523s ]
+[2021-06-22T15:06:22+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 1 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.017335s ]
+[2021-06-22T15:06:22+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 2 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.019494s ]
+[2021-06-22T15:06:22+08:00][sql] SHOW FULL COLUMNS FROM `rh_swiper` [ RunTime:0.026072s ]
+[2021-06-22T15:06:22+08:00][sql] SELECT * FROM `rh_swiper` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_swiper`.`delete_time` = 0 LIMIT 1 [ RunTime:0.026225s ]
+[2021-06-22T15:06:22+08:00][info] [ VIEW ] D:\ruanjian\phpstudy_pro\WWW\project\ankerui\app\index\pc_view\index\index.html [ array (
+  0 => 'app',
+  1 => 'site_detail',
+  2 => 'main_detail',
+) ]
+[2021-06-22T15:07:36+08:00][sql] CONNECT:[ UseTime:0.041982s ] mysql:host=47.102.153.100;port=3306;dbname=an_ke_rui;charset=utf8
+[2021-06-22T15:07:36+08:00][sql] SHOW FULL COLUMNS FROM `rh_site` [ RunTime:0.026519s ]
+[2021-06-22T15:07:36+08:00][sql] SELECT * FROM `rh_site` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_site`.`delete_time` = 0 LIMIT 1 [ RunTime:0.021621s ]
+[2021-06-22T15:07:36+08:00][sql] SHOW FULL COLUMNS FROM `rh_news` [ RunTime:0.020356s ]
+[2021-06-22T15:07:36+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 1 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.023701s ]
+[2021-06-22T15:07:36+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 2 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.023767s ]
+[2021-06-22T15:07:36+08:00][sql] SHOW FULL COLUMNS FROM `rh_swiper` [ RunTime:0.021573s ]
+[2021-06-22T15:07:36+08:00][sql] SELECT * FROM `rh_swiper` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_swiper`.`delete_time` = 0 LIMIT 1 [ RunTime:0.020449s ]
+[2021-06-22T15:07:36+08:00][info] [ VIEW ] D:\ruanjian\phpstudy_pro\WWW\project\ankerui\app\index\pc_view\index\index.html [ array (
+  0 => 'app',
+  1 => 'site_detail',
+  2 => 'main_detail',
+) ]
+[2021-06-22T15:10:56+08:00][sql] CONNECT:[ UseTime:0.044317s ] mysql:host=47.102.153.100;port=3306;dbname=an_ke_rui;charset=utf8
+[2021-06-22T15:10:56+08:00][sql] SHOW FULL COLUMNS FROM `rh_site` [ RunTime:0.021920s ]
+[2021-06-22T15:10:56+08:00][sql] SELECT * FROM `rh_site` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_site`.`delete_time` = 0 LIMIT 1 [ RunTime:0.026795s ]
+[2021-06-22T15:10:56+08:00][sql] SHOW FULL COLUMNS FROM `rh_news` [ RunTime:0.020704s ]
+[2021-06-22T15:10:56+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 1 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.019780s ]
+[2021-06-22T15:10:56+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 2 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.022798s ]
+[2021-06-22T15:10:56+08:00][sql] SHOW FULL COLUMNS FROM `rh_swiper` [ RunTime:0.024138s ]
+[2021-06-22T15:10:56+08:00][sql] SELECT * FROM `rh_swiper` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_swiper`.`delete_time` = 0 LIMIT 1 [ RunTime:0.021912s ]
+[2021-06-22T15:10:56+08:00][info] [ VIEW ] D:\ruanjian\phpstudy_pro\WWW\project\ankerui\app\index\pc_view\index\index.html [ array (
+  0 => 'app',
+  1 => 'site_detail',
+  2 => 'main_detail',
+) ]
+[2021-06-22T15:12:31+08:00][sql] CONNECT:[ UseTime:0.035594s ] mysql:host=47.102.153.100;port=3306;dbname=an_ke_rui;charset=utf8
+[2021-06-22T15:12:31+08:00][sql] SHOW FULL COLUMNS FROM `rh_site` [ RunTime:0.023849s ]
+[2021-06-22T15:12:31+08:00][sql] SELECT * FROM `rh_site` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_site`.`delete_time` = 0 LIMIT 1 [ RunTime:0.019630s ]
+[2021-06-22T15:12:31+08:00][sql] SHOW FULL COLUMNS FROM `rh_news` [ RunTime:0.046978s ]
+[2021-06-22T15:12:31+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 1 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.021324s ]
+[2021-06-22T15:12:31+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 2 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.020759s ]
+[2021-06-22T15:12:31+08:00][sql] SHOW FULL COLUMNS FROM `rh_swiper` [ RunTime:0.019747s ]
+[2021-06-22T15:12:31+08:00][sql] SELECT * FROM `rh_swiper` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_swiper`.`delete_time` = 0 LIMIT 1 [ RunTime:0.022865s ]
+[2021-06-22T15:12:31+08:00][info] [ VIEW ] D:\ruanjian\phpstudy_pro\WWW\project\ankerui\app\index\pc_view\index\index.html [ array (
+  0 => 'app',
+  1 => 'site_detail',
+  2 => 'main_detail',
+) ]
+[2021-06-22T15:12:46+08:00][sql] CONNECT:[ UseTime:0.036299s ] mysql:host=47.102.153.100;port=3306;dbname=an_ke_rui;charset=utf8
+[2021-06-22T15:12:46+08:00][sql] SHOW FULL COLUMNS FROM `rh_site` [ RunTime:0.021631s ]
+[2021-06-22T15:12:46+08:00][sql] SELECT * FROM `rh_site` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_site`.`delete_time` = 0 LIMIT 1 [ RunTime:0.022779s ]
+[2021-06-22T15:12:46+08:00][sql] SHOW FULL COLUMNS FROM `rh_news` [ RunTime:0.022264s ]
+[2021-06-22T15:12:46+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 1 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.021666s ]
+[2021-06-22T15:12:46+08:00][sql] SELECT `id` FROM `rh_news` WHERE (  ( first_news_class_id = 2 ) ) AND `rh_news`.`delete_time` = 0 ORDER BY `sort` ASC,`id` DESC LIMIT 1 [ RunTime:0.021390s ]
+[2021-06-22T15:12:46+08:00][sql] SHOW FULL COLUMNS FROM `rh_swiper` [ RunTime:0.024228s ]
+[2021-06-22T15:12:46+08:00][sql] SELECT * FROM `rh_swiper` WHERE (  `is_pass` = 1  AND `id` = 1 ) AND `rh_swiper`.`delete_time` = 0 LIMIT 1 [ RunTime:0.023360s ]
+[2021-06-22T15:12:46+08:00][info] [ VIEW ] D:\ruanjian\phpstudy_pro\WWW\project\ankerui\app\index\pc_view\index\index.html [ array (
+  0 => 'app',
+  1 => 'site_detail',
+  2 => 'main_detail',
+) ]

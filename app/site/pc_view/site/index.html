@@ -1,0 +1,44 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 站点后台 > 站点设置 > 首页
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-row class="el-tool-bar">
+        <el-col :span="6">
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+                <el-breadcrumb-item>{{breadcrumb.first_role_rule_name}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{breadcrumb.second_role_rule_name}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{breadcrumb.third_role_rule_name}}</el-breadcrumb-item>
+            </el-breadcrumb>
+        </el-col>
+        <el-col :span="18" class="right_align padding_right_10">
+            {:reload_data_button()}
+        </el-col>
+    </el-row>
+
+    <el-form class="padding_20" label-width="150px" @submit.native.prevent>
+        {include file="../../common/view/site"}
+
+        <el-form-item>
+            {:site_save_data_button()}
+        </el-form-item>
+    </el-form>
+</div>
+
+<script src="/static/renhe-ui/data/site_data.js"></script>
+<script src="/static/renhe-ui/json/city_pass_cascader_json.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                is_dialog_form: false, //是否 弹窗表单
+                city_pass_cascader: city_pass_cascader_json,
+                main_detail: site_data.get_site_any_detail('{$siter_login_detail["site_id"]}')
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

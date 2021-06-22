@@ -1,0 +1,34 @@
+<!--
+-+--------------------------------------------------
+-| 手机端
+-| 购物车 > 付款
+-+--------------------------------------------------
+-->
+<div id="app">
+    <van-nav-bar ref="nav_bar" title="购物车-付款"></van-nav-bar>
+
+    <ul class="cart_finish_info">
+        <li>
+            <van-icon name="checked" size="40"></van-icon>
+        </li>
+        <li>
+            订单编号：201888
+        </li>
+        <li>
+            订单金额：￥100.00
+        </li>
+        <li>
+            <van-button type="primary" icon="wap-home" size="mini">付款</van-button>
+        </li>
+    </ul>
+</div>
+
+<script>
+    let vue_param = {
+        data() {
+            return {}
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

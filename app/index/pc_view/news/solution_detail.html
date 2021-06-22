@@ -1,0 +1,121 @@
+<style>
+    .switchTab li{width: auto; margin: 0 10px;}
+</style>
+
+<!-- 轮播图 -->
+<div class="swiper-container swiper-container1">
+    <div class="swiper-wrapper">
+        {swiper:image_list id='4'}
+        <div class="swiper-slide">
+            <img src="{$value['image']}" class="pc_banner">
+        </div>
+        {/swiper:image_list}
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+
+<!--
+<div class="solution-container">
+    <img src="/app/index/pc_view/image/left.png" onClick="moveList('left',26,this)" class="left" alt="">
+    <div class="solution-wrap">
+        <ul class="switchTab">
+            {news:list news_class_id='1'}
+                <li class="rotateInDownRight animated wow {if condition="$value.id == $main_detail.id"}aboutPlateCheck{/if}">
+                    <a href="{$value['news_detail_url']}">{$value['news_name_eng']} {$value['news_name']}</a>
+                </li>
+            {/news:list}
+        </ul>
+    </div>
+    <img src="/app/index/pc_view/image/right.png" onClick="moveList('right',26,this)" class="right" alt="">
+</div>
+-->
+
+<!-- 列表 - 2020-04-27 -->
+<ul class="wrap classifyList" style="width: 89%;">
+    {news:list news_class_id='1'}
+    <li style="padding-bottom: 5px;width: 290px;">
+        <a href="{$value['news_detail_url']}">{$value['news_name_eng']} {$value['news_name']}</a>
+    </li>
+    {/news:list}
+</ul>
+
+<!--面包屑-->
+<ul class="wrap navigation" style="margin-top: 10px;">
+    <li class="rotateInDownLeft animated wow">
+        <img src="/app/index/pc_view/image/address2.png" alt="地标"/>
+        当前位置：
+    </li>
+    <li class="rotateInDownLeft animated wow">
+        <a href="/" class="selectText">首页</a> >
+    </li>
+    <li class="rotateInDownLeft animated wow">
+        <a href="" class="selectText">解决方案</a> >
+    </li>
+    <li class="rotateInDownLeft animated wow">
+        <span class="selectText">{$main_detail['news_name_eng']} {$main_detail['news_name']}</span>
+    </li>
+</ul>
+<!--二级分类-->
+
+<div class="detail-wrap solution-wrap wrap">
+    <div class="left rotateInDownRight animated wow" style="width: 97% !important;border: 1px solid #05A25F;">
+        <img src="{$main_detail['image']}" alt="" style="width: 100%;">
+    </div>
+    <div class="right rotateInDownLeft animated wow" style="width: 100%;">
+        <h3 style="font-size: 20px;">{$main_detail['news_name_eng']} {$main_detail['news_name']}</h3>
+        <h6>系统功能:</h6>
+        <p>{$main_detail['gong_neng']}</p>
+        <h6>应用场所:</h6>
+        <p id="content1" style="text-indent: 0;">{$main_detail['fan_wei']}</p>
+        <!--
+        <h6>订货范例:</h6>
+        <p>{$main_detail['fan_li']}</p>
+        -->
+    </div>
+</div>
+
+<ul class="wrap switchProduct switch_tab">
+    <li onclick="set_tab(0)" class="switchCheck">技术参数</li>
+    <li onclick="set_tab(1)">系统功能</li>
+    <li onclick="set_tab(2)">设备选型</li>
+<!--    <li onclick="set_tab(3)">产品报价</li>-->
+</ul>
+
+<ul class="detail product-detail tab_content" style="padding: 20px;">
+    <li id="detail_content" style="width: 60%;">{$main_detail['content']|raw}</li>
+    <li id="detail_xuan_xing" style="width: 60%;">{$main_detail['xuan_xing']|raw}</li>
+    <li id="detail_chi_cun" style="width: 60%;">{$main_detail['chi_cun']|raw}</li>
+<!--    <li id="detail_bao_jia">{$main_detail['bao_jia']|raw}</li>-->
+</ul>
+
+
+<script>
+    window.onload = function(){
+        var div2=document.getElementById("content1");
+        var content1=div2.innerHTML;
+        div2.innerHTML=content1.replace(/；/g,"；<br>"); //replace替换标签
+    }
+    set_nav(3); //设置 导航
+    set_tab(0); //切换标签
+
+    let present = 0; // 当前数值
+    let presentNum = 1; // 当前数值
+
+    function moveList(type, sum, e) {
+        let queryType = type == 'left' ? 'nextSibling' : 'previousSibling';
+        let total = sum * 106;
+        let switchTab = document.getElementsByClassName('switchTab')[0];
+
+        if (type == 'right' && Math.ceil(total / 1200) > presentNum) {
+            present += 1200;
+            presentNum += 1;
+            switchTab.style = `margin-left:-${present}px`;
+        }
+
+        if (type == 'left' && present != 0) {
+            present -= 1200;
+            presentNum -= 1;
+            switchTab.style = `margin-left:-${present}px`;
+        }
+    }
+</script>

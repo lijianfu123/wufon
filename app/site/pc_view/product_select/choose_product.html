@@ -1,0 +1,78 @@
+<style>
+    body {
+        background: white;
+    }
+</style>
+
+<div id="app" v-cloak style="background: white;">
+    <el-form class="padding_20" label-width="100px" @submit.native.prevent>
+        <el-form-item label="关键字" :required="true">
+            <el-row>
+                <el-col :span="16">
+                    <el-input placeholder="请输入关键字" maxlength="20" show-word-limit="true" clearable="true"
+                              v-model="keyword"></el-input>
+                </el-col>
+                <el-col :span="1">&nbsp;</el-col>
+                <el-col :span="4">
+                    <el-button type="primary" @click="search">搜索</el-button>
+                </el-col>
+            </el-row>
+        </el-form-item>
+    </el-form>
+
+    <table class="layui-table">
+        <colgroup>
+            <col width="150">
+            <col width="200">
+            <col>
+        </colgroup>
+        <thead>
+        <tr>
+            <th>股票名称</th>
+            <th>股票代码</th>
+            <th>选择</th>
+        </tr>
+        </thead>
+        <tbody>
+        {volist name="list" id="value"}
+        <tr>
+            <td>{$value['product_name']}</td>
+            <td>{$value['product_code']}</td>
+            <td style="width: 100px;">
+                <button class="layui-btn layui-btn-normal"
+                        onclick="choose_product('{$value.id}', '{$value.product_name}');">选择
+                </button>
+            </td>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+</div>
+
+<script src="/static/renhe-ui/data/ad_data.js"></script>
+<script>
+    /**
+     * 选择股票
+     * @param product_id
+     * @param product_name
+     */
+    function choose_product(product_id, product_name) {
+        parent.$('#product_id').val(product_id);
+        parent.$('#product_name').val(product_name);
+        parent.layer.closeAll();
+    }
+
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                keyword: '{$keyword}'
+            }
+        },
+        methods: {
+            search() {
+                location.href = '?keyword=' + this.keyword;
+            }
+        }
+    });
+</script>

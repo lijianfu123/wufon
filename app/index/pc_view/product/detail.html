@@ -1,0 +1,187 @@
+<style>
+    .classifyList li {line-height: 30px; width: 240px;}
+</style>
+
+<!-- 轮播图 -->
+<div class="swiper-container swiper-container1">
+    <div class="swiper-wrapper">
+        {swiper:image_list id='3'}
+            <div class="swiper-slide">
+                <img src="{$value['image']}" class="pc_banner">
+            </div>
+        {/swiper:image_list}
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+
+<!--商品分类-->
+<ul class="switchTab">
+    {product_class:list parent_id='0'}
+        <li class="rotateInDownRight animated wow {if condition="$value.id == $main_detail.FirstProductClass.id"}aboutPlateCheck{/if}">
+            <a href="{$value['product_list_url']}">{$value['product_class_name']}</a>
+        </li>
+    {/product_class:list}
+</ul>
+
+<!--商品二级分类-->
+{php}$product_class_id = $main_detail['FirstProductClass']['id'];{/php}
+<ul class="wrap classifyList"  style="width: 89%;">
+    {product_class:list parent_id='$product_class_id'}
+    <li  style="width: 290px;padding-bottom: 5px;">
+        <a href="{$value['product_list_url']}">{$value['product_class_name']}</a>
+    </li>
+    {/product_class:list}
+</ul>
+
+<!--面包屑-->
+<ul class="wrap navigation">
+    <li class="rotateInDownLeft animated wow">
+        <img src="/app/index/pc_view/image/address2.png" alt="地标"/>
+        当前位置：
+    </li>
+    <li class="rotateInDownLeft animated wow">
+        <a href="/" class="selectText">首页</a> >
+    </li>
+    <li class="rotateInDownLeft animated wow">
+        <a href="" class="selectText">产品中心</a> >
+    </li>
+    <li class="rotateInDownLeft animated wow">
+        <span class="selectText">{$main_detail['FirstProductClass']['product_class_name']}</span>
+    </li>
+</ul>
+
+<style>
+    .swiper-container {
+        width: 100%;
+        /* height: 300px; */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .swiper-slide {
+        background-size: cover;
+        background-position: center;
+    }
+
+    .gallery-top {
+        height: 80%;
+        width: 100%;
+    }
+
+    .gallery-thumbs {
+        height: 20%;
+        box-sizing: border-box;
+        padding: 10px 0;
+    }
+
+    .gallery-thumbs .swiper-slide {
+        width: 25%;
+        height: 100%;
+        opacity: 0.4;
+    }
+
+    .gallery-thumbs .swiper-slide-thumb-active {
+        opacity: 1;
+    }
+
+    .switchCheck {
+        background: rgba(5, 162, 95, 1);
+        border-radius: 10px 10px 0px 0px;
+        color: #fff;
+    }
+</style>
+
+<div class="detail-wrap wrap">
+    <div class="left">
+        <!-- 大图一级 -->
+        <div class="swiper-container swiper-container3 gallery-top">
+            <div class="swiper-wrapper ">
+                {volist name='$main_detail.image_list_json' id='value'}
+                    <div class="swiper-slide swiper-slide-active data"  style=" margin-right: 85px !important;">
+                        <img src="{$value['image']}" class="pc_banner">
+                    </div>
+                {/volist}
+        </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <!-- 小图二级 -->
+        <div class="swiper-container gallery-thumbs">
+            <div class="swiper-wrapper" style="display: flex;flex-wrap: wrap;">
+                {volist name='main_detail.image_list_json' id='value'}
+                    <div class="swiper-slide">
+                        <img src="{$value['image']}" class="pc_banner">
+                    </div>
+                {/volist}
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+    <div class="right" style="width:100% !important;">
+        <h3>{$main_detail['product_name']}</h3>
+        <h6>产品功能:</h6>
+        <p>{$main_detail['gong_neng']}</p>
+        <h6>使用范围:</h6>
+        <p>{$main_detail['fan_wei']}
+        </p>
+        <h6>订货范例:</h6>
+        <p>{$main_detail['fan_li']}</p>
+    </div>
+</div>
+
+<ul class="wrap switchProduct switch_tab">
+    <li onclick="set_tab(0)" class="switchCheck">技术参数</li>
+    <li onclick="set_tab(1)">产品选型</li>
+    <li onclick="set_tab(2)">外形尺寸</li>
+    <li onclick="set_tab(3)">产品报价</li>
+</ul>
+<ul class="detail product-detail tab_content">
+    <li id="detail_content" style="max-width: 798px;">
+        <p style="width: 70%; text-align: center;">
+            {$main_detail['content']|raw}
+        </p>
+    </li>
+    <li id="detail_xuan_xing" style="max-width: 798px;">
+        <p style="width: 70%; text-align: center;">
+            {$main_detail['xuan_xing']|raw}
+        </p>
+    </li>
+    <li id="detail_chi_cun" style="max-width: 798px;">
+        <p style="width: 70%; text-align: center;">
+            {$main_detail['chi_cun']|raw}
+        </p>
+    </li>
+    <li id="detail_bao_jia" style="max-width: 798px;">
+        <p style="width: 70%; text-align: center;">
+            {$main_detail['bao_jia']|raw}
+        </p>
+    </li>
+</ul>
+
+<script>
+    set_nav(2); //设置 导航
+    set_tab(0); //切换标签
+
+    var galleryThumbs = new Swiper('.gallery-thumbs', {
+        spaceBetween: 10,
+        slidesPerView: 4,
+        freeMode: true,
+        watchSlidesVisibility: true,
+        watchSlidesProgress: true,
+    });
+    var galleryTop = new Swiper('.gallery-top', {
+        spaceBetween: 30,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        thumbs: {
+            swiper: galleryThumbs
+        }
+    });
+</script>
+<style scoped>
+        .data{
+        width: 325px !important;
+        margin-right: 105px !important;
+    }
+    </style>

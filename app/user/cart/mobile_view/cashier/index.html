@@ -1,0 +1,114 @@
+<!--
+-+--------------------------------------------------
+-| 手机端
+-| 购物车 > 收银台
+-+--------------------------------------------------
+-->
+<div id="app">
+    <van-nav-bar ref="nav_bar" title="购物车-收银台" left-arrow @click-left="back()"></van-nav-bar>
+
+    <van-contact-card :type="cardType" :name="linkman.name" :tel="linkman.tel"></van-contact-card>
+
+    <!--商品列表-->
+    <van-list>
+        <van-cell>
+            <van-row class="cart_list">
+                <van-col span="4" class="center_align">
+                    <van-image width="35" height="35" src="https://img.yzcdn.cn/vant/cat.jpeg" class="margin_top_5"></van-image>
+                </van-col>
+                <van-col span="20" class="padding_5">
+                    <van-row>
+                        南极人网红暖水袋南极人网红暖水袋南极人网红暖水袋南极人网红暖水袋
+                    </van-row>
+                    <van-row class="gray padding_bottom_5">
+                        <van-col span="12">
+                            规格：<span class="red">500ml</span>
+                        </van-col>
+                        <van-col span="12" class="right_align">
+                            单价：<span class="red">￥5.10/瓶</span>
+                        </van-col>
+                        <van-col span="12">
+                            数量：<span class="red">3</span>
+                        </van-col>
+                        <van-col span="12" class="right_align">
+                            小计：<span class="red">￥15.30</span>
+                        </van-col>
+                    </van-row>
+                </van-col>
+            </van-row>
+
+            <van-row class="cart_list">
+                <van-col span="4" class="center_align">
+                    <van-image width="35" height="35" src="https://img.yzcdn.cn/vant/cat.jpeg" class="margin_top_5"></van-image>
+                </van-col>
+                <van-col span="20" class="padding_5">
+                    <van-row>
+                        南极人网红暖水袋南极人网红暖水袋南极人网红暖水袋南极人网红暖水袋
+                    </van-row>
+                    <van-row class="gray padding_bottom_5">
+                        <van-col span="12">
+                            规格：<span class="red">500ml</span>
+                        </van-col>
+                        <van-col span="12" class="right_align">
+                            单价：<span class="red">￥5.10/瓶</span>
+                        </van-col>
+                    </van-row>
+                    <van-row class="right_align">
+                        <van-stepper v-model="main_detail.id" step="1"></van-stepper>
+                    </van-row>
+                </van-col>
+            </van-row>
+        </van-cell>
+    </van-list>
+
+    <!--付款方式-->
+    <van-panel title="付款方式" class="margin_top_5">
+        <van-radio-group v-model="pay_type">
+            <van-cell-group>
+                <van-cell title="微信支付" icon="wechat">
+                    <van-radio slot="right-icon" name="2"></van-radio>
+                </van-cell>
+            </van-cell-group>
+        </van-radio-group>
+    </van-panel>
+
+    <!--备注-->
+    <van-panel title="备注" class="margin_top_5">
+        <van-field type="textarea" rows="3" maxlength="100" placeholder="请输入留言"></van-field>
+    </van-panel>
+
+    <van-submit-bar ref="submit_bar" button-text="支付订单" @submit="onSubmit">
+        <van-row style="width: 100%;">
+            <van-col class="left_align padding_10">
+                <div>已选择 38 件商品</div>
+                <div>订单合计：￥100.00</div>
+            </van-col>
+        </van-row>
+    </van-submit-bar>
+</div>
+
+<script>
+    let vue_param = {
+        computed: {
+            cardType() {
+                return 'edit';
+            }
+        },
+        data() {
+            return {
+                pay_type: PAY_TYPE_ENUM.wechat.code.toString(),
+                linkman: {
+                    name: '李先生',
+                    tel: '1830000xxxx'
+                }
+            }
+        },
+        methods: {
+            onSubmit() {
+                location.href = '{:cart_finish_url()}';
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

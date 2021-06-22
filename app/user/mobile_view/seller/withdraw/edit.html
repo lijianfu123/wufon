@@ -1,0 +1,19 @@
+<van-cell-group>
+    <van-field label="当前余额" readonly v-model="main_detail.balance"></van-field>
+    <van-field type="number" label="提现金额" placeholder="请输入提现金额" required clearable v-model="main_detail.tel"></van-field>
+</van-cell-group>
+
+<div class="padding_5">
+    <van-button type="danger" icon="success" size="small" block>提交</van-button>
+</div>
+
+<van-notice-bar wrapable :scrollable="false">
+    <ul>
+        <li>提现说明：</li>
+        <li>最小提现金额：￥100</li>
+        <li>最大提现金额：￥1000</li>
+        <li>提现手续费：5%</li>
+        <li>本次提现将扣除手续费：￥0</li>
+        <li>本次提现实际到账金额：￥0</li>
+    </ul>
+</van-notice-bar>

@@ -1,0 +1,17 @@
+<!--
+-+--------------------------------------------------
+-| 手机端
+-| 会员中心 > 收货地址 > 添加、修改
+-+--------------------------------------------------
+-->
+<van-cell-group>
+    <van-field label="收货人" placeholder="请输入收货人" required clearable v-model="main_detail.linkname"></van-field>
+    <van-field label="电话" placeholder="请输入电话" required clearable v-model="main_detail.tel"></van-field>
+    <van-field label="城市" placeholder="请选择城市" required clearable readonly v-model="main_detail.city"></van-field>
+    <van-field label="地址" placeholder="请输入地址" required clearable v-model="main_detail.address"></van-field>
+    <van-switch-cell title="设为默认地址" v-model="main_detail.is_default"></van-switch-cell>
+</van-cell-group>
+
+<div class="padding_5">
+    <van-button type="danger" icon="success" size="small" block>提交</van-button>
+</div>

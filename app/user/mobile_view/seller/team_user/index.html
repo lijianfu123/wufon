@@ -1,0 +1,105 @@
+<!--
+-+--------------------------------------------------
+-| 手机端
+-| 会员中心 > 销售 > 我的团队 > 列表
+-+--------------------------------------------------
+-->
+<div id="app">
+    <van-nav-bar ref="nav_bar" title="我的团队" left-arrow @click-left="back()"></van-nav-bar>
+
+    <van-tabs v-model="tabs_active">
+        <van-tab title="一级会员" name="first_tab">
+            <van-list>
+                <van-cell>
+                    <template slot="title">
+                        <van-row>
+                            <van-col span="4">
+                                <van-image width="20" height="20" src="https://img.yzcdn.cn/vant/cat.jpeg" round></van-image>
+                            </van-col>
+                            <van-col span="20">
+                                滴水1
+                            </van-col>
+                        </van-row>
+                    </template>
+                </van-cell>
+                <van-cell>
+                    <template slot="title">
+                        <van-row>
+                            <van-col span="4">
+                                <van-image width="20" height="20" src="https://img.yzcdn.cn/vant/cat.jpeg" round></van-image>
+                            </van-col>
+                            <van-col span="20">
+                                滴水1
+                            </van-col>
+                        </van-row>
+                    </template>
+                </van-cell>
+                <van-cell>
+                    <template slot="title">
+                        <van-row>
+                            <van-col span="4">
+                                <van-image width="20" height="20" src="https://img.yzcdn.cn/vant/cat.jpeg" round></van-image>
+                            </van-col>
+                            <van-col span="20">
+                                滴水1
+                            </van-col>
+                        </van-row>
+                    </template>
+                </van-cell>
+            </van-list>
+        </van-tab>
+        <van-tab title="二级会员" name="second_tab">
+            <van-list>
+                <van-cell>
+                    <template slot="title">
+                        <van-row>
+                            <van-col span="4">
+                                <van-image width="20" height="20" src="https://img.yzcdn.cn/vant/cat.jpeg" round></van-image>
+                            </van-col>
+                            <van-col span="20">
+                                滴水2
+                            </van-col>
+                        </van-row>
+                    </template>
+                </van-cell>
+                <van-cell>
+                    <template slot="title">
+                        <van-row>
+                            <van-col span="4">
+                                <van-image width="20" height="20" src="https://img.yzcdn.cn/vant/cat.jpeg" round></van-image>
+                            </van-col>
+                            <van-col span="20">
+                                滴水2
+                            </van-col>
+                        </van-row>
+                    </template>
+                </van-cell>
+                <van-cell>
+                    <template slot="title">
+                        <van-row>
+                            <van-col span="4">
+                                <van-image width="20" height="20" src="https://img.yzcdn.cn/vant/cat.jpeg" round></van-image>
+                            </van-col>
+                            <van-col span="20">
+                                滴水2
+                            </van-col>
+                        </van-row>
+                    </template>
+                </van-cell>
+            </van-list>
+        </van-tab>
+    </van-tabs>
+</div>
+
+
+<script>
+    let vue_param = {
+        data() {
+            return {
+                tabs_active: 'first_tab' //tabs 激活页签
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

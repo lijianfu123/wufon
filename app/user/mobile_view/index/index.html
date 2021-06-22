@@ -1,0 +1,195 @@
+<!--
+-+--------------------------------------------------
+-| 手机端
+-| 会员中心 > 首页
+-+--------------------------------------------------
+-->
+<div id="app">
+    <!--会员信息-->
+    <van-row class="user_info">
+        <van-col span="8" class="balance">
+            <div>账户余额</div>
+            <div>￥0.00</div>
+        </van-col>
+        <van-col span="8" class="user">
+            <div>
+                <img src="https://img.yzcdn.cn/vant/apple-1.jpg">
+            </div>
+            <div>滴水</div>
+        </van-col>
+        <van-col span="8" class="team">
+            <div>我的团队</div>
+            <div>5</div>
+        </van-col>
+    </van-row>
+    <div class="user_commend_info">
+        <span class="gray">
+            我推荐的人数：
+        </span>
+        <span>5</span>
+        <span class="gray padding_left_20">
+            我的推荐人：
+        </span>
+        <span>滴水</span>
+    </div>
+
+    <!--订单-->
+    <van-panel title="我的订单" status="查看全部订单" class="margin_top_5">
+        <van-grid :column-num="4">
+            <van-grid-item>
+                <a href="{:user_create_order_url()}">
+                    <div>
+                        <van-icon name="cash-on-deliver"></van-icon>
+                    </div>
+                    <div>待付款</div>
+                </a>
+            </van-grid-item>
+            <van-grid-item>
+                <a href="{:user_wait_express_order_url()}">
+                    <div>
+                        <van-icon name="logistics"></van-icon>
+                    </div>
+                    <div>待发货</div>
+                </a>
+            </van-grid-item>
+            <van-grid-item>
+                <a href="{:user_wait_receive_order_url()}">
+                    <div>
+                        <van-icon name="bag-o"></van-icon>
+                    </div>
+                    <div>待收货</div>
+                </a>
+            </van-grid-item>
+            <van-grid-item>
+                <a href="{:user_finish_order_url()}">
+                    <div>
+                        <van-icon name="sign"></van-icon>
+                    </div>
+                    <div>已完成</div>
+                </a>
+            </van-grid-item>
+        </van-grid>
+    </van-panel>
+
+    <!--创客中心-->
+    <van-panel title="创客中心" class="margin_top_5">
+        <van-grid :column-num="4">
+            <van-grid-item>
+                <a href="{:user_seller_commend_award_url()}">
+                    <div>
+                        <van-icon name="balance-o"></van-icon>
+                    </div>
+                    <div>推荐奖</div>
+                </a>
+            </van-grid-item>
+            <van-grid-item>
+                <a href="{:user_seller_team_award_url()}">
+                    <div>
+                        <van-icon name="balance-pay"></van-icon>
+                    </div>
+                    <div>团队奖</div>
+                </a>
+            </van-grid-item>
+            <van-grid-item>
+                <a href="{:user_seller_sell_award_url()}">
+                    <div>
+                        <van-icon name="chart-trending-o"></van-icon>
+                    </div>
+                    <div>业绩奖</div>
+                </a>
+            </van-grid-item>
+            <van-grid-item>
+                <a href="{:user_seller_withdraw_url()}">
+                    <div>
+                        <van-icon name="paid"></van-icon>
+                    </div>
+                    <div>提现</div>
+                </a>
+            </van-grid-item>
+            <van-grid-item>
+                <a href="{:user_seller_team_user_url()}">
+                    <div>
+                        <van-icon name="friends-o"></van-icon>
+                    </div>
+                    <div>我的团队</div>
+                </a>
+            </van-grid-item>
+            <van-grid-item>
+                <a href="{:user_seller_team_order_url()}">
+                    <div>
+                        <van-icon name="orders-o"></van-icon>
+                    </div>
+                    <div>团队订单</div>
+                </a>
+            </van-grid-item>
+            <van-grid-item>
+                <a href="{:user_seller_authorize_url()}">
+                    <div>
+                        <van-icon name="medel-o"></van-icon>
+                    </div>
+                    <div>授权书</div>
+                </a>
+            </van-grid-item>
+            <van-grid-item>
+                <a href="{:user_seller_qrcode_url()}">
+                    <div>
+                        <van-icon name="qr"></van-icon>
+                    </div>
+                    <div>推广码</div>
+                </a>
+            </van-grid-item>
+        </van-grid>
+    </van-panel>
+
+    <!--会员-->
+    <van-panel title="会员信息" class="margin_top_5">
+        <van-grid :column-num="4">
+            <van-grid-item>
+                <a href="{:user_update_url()}">
+                    <div>
+                        <van-icon name="user-o"></van-icon>
+                    </div>
+                    <div>会员资料</div>
+                </a>
+            </van-grid-item>
+            <van-grid-item>
+                <a href="{:user_address_url()}">
+                    <div>
+                        <van-icon name="location-o"></van-icon>
+                    </div>
+                    <div>收货地址</div>
+                </a>
+            </van-grid-item>
+            <van-grid-item>
+                <a href="{:user_money_url()}">
+                    <div>
+                        <van-icon name="balance-list-o"></van-icon>
+                    </div>
+                    <div>财务记录</div>
+                </a>
+            </van-grid-item>
+            <van-grid-item>
+                <a href="{:user_recharge_url()}">
+                    <div>
+                        <van-icon name="after-sale"></van-icon>
+                    </div>
+                    <div>充值</div>
+                </a>
+            </van-grid-item>
+        </van-grid>
+    </van-panel>
+
+    {include file="../../../view/index/mobile/tab_bar"}
+</div>
+
+<script>
+    let vue_param = {
+        data() {
+            return {
+                tab_bar_active: 'user'
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

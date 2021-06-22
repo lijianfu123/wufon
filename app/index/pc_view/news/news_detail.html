@@ -1,0 +1,69 @@
+<!-- 轮播图 -->
+<div class="swiper-container swiper-container1">
+    <div class="swiper-wrapper">
+        {swiper:image_list id='2'}
+        <div class="swiper-slide">
+            <img src="{$value['image']}" class="pc_banner">
+        </div>
+        {/swiper:image_list}
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+
+<div class="about-container aboutDetail" style="background: none;">
+    <ul class="wrap navigation">
+        <li class="rotateInDownLeft animated wow">
+            <img src="/app/index/pc_view/image/address2.png" alt="地标"/>
+            当前位置：
+        </li>
+        <li class="rotateInDownLeft animated wow">
+            <a href="">首页></a>
+        </li>
+        <li class="rotateInDownLeft animated wow">
+            <a href="">企业介绍></a>
+        </li>
+        <li class="rotateInDownLeft animated wow">
+            <a href="" class="selectText">新闻详情></a>
+        </li>
+    </ul>
+    <div class="news-detail wrap container" style="max-width: 850px;">
+        <h1>{$main_detail.news_name}</h1>
+        <h6>{$main_detail.update_time}</h6>
+        <p> {$main_detail.content|raw}</p>
+    </div>
+    {php}
+    $NewsModel = new \app\common\model\NewsModel();
+    $id = input('id');
+
+    $previous_news_detail = $NewsModel->where("(first_news_class_id = 4) and (id <" . $id . ")")->order('id desc')->findOrEmpty();
+    $next_news_detail = $NewsModel->where("(first_news_class_id = 4) and (id >" . $id . ")")->order('id desc')->findOrEmpty();
+    {/php}
+    <ul class="news-toggle wrap container">
+        <li>
+            <span>上一篇:</span>
+            {if condition="$previous_news_detail->isEmpty()"}
+                无
+            {else /}
+                <a href="news_detail{$previous_news_detail['id']}.html">{$previous_news_detail['news_name']}</a>
+            {/if}
+        </li>
+        <li>
+            <span>下一篇:</span>
+            {if condition="$next_news_detail->isEmpty()"}
+                无
+            {else /}
+                <a href="news_detail{$next_news_detail['id']}.html">{$next_news_detail['news_name']}</a>
+            {/if}
+        </li>
+    </ul>
+</div>
+
+<script>
+    set_nav(1); //设置 导航
+</script>
+<style>
+    .news-detail img{
+        height: auto !important;
+        width: auto !important;
+    }
+</style>

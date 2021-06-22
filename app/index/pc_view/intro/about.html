@@ -1,0 +1,288 @@
+<!-- 轮播图 -->
+<div class="swiper-container swiper-container1">
+    <div class="swiper-wrapper">
+        {swiper:image_list id='2'}
+            <div class="swiper-slide">
+                <img src="{$value['image']}" class="pc_banner">
+            </div>
+        {/swiper:image_list}
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+
+<!-- 选项卡 -->
+<!--
+<ul class="switchTab">
+    <li class="aboutPlateCheck rotateInDownLeft animated wow" onclick="switchTab(1,event)">公司介绍</li>
+    <li class="rotateInDownRight animated wow" onclick="switchTab(2,event)">企业资质</li>
+</ul>
+-->
+
+<ul class="switchTab" style="position: relative;display: flex;">
+    <li class="aboutPlateCheck rotateInDownLeft animated wow switchLi" onclick="switchTab(0,event)">公司介绍</li>
+    <li class="rotateInDownRight animated wow switchLi" onclick="switchTab(1,event)">企业资质</li>
+    <li class="rotateInDownRight animated wow switchLi" onclick="switchTab(2,event)">新闻中心</li>
+</ul>
+
+<div class="about-container aboutDetail" style="background: none;">
+    <!--面包屑-->
+    <ul class="wrap navigation">
+        <li class="rotateInDownLeft animated wow">
+            <img src="/app/index/pc_view/image/address2.png" alt="地标"/>
+            当前位置：
+        </li>
+        <li class="rotateInDownLeft animated wow">
+            <a href="/" class="selectText">首页</a> >
+        </li>
+        <li class="rotateInDownLeft animated wow">
+            <span class="selectText">{$main_detail['intro_name']}</span> >
+        </li>
+        <li class="rotateInDownLeft animated wow">
+            <span class="selectText" id="intro_name">
+                {php}
+                    switch(input('tab')){
+                        case '0':
+                            echo '公司介绍';
+                            break;
+                        case '1':
+                            echo '企业资质';
+                            break;
+                        case '2':
+                            echo '新闻中心';
+                            break;
+                    }
+                {/php}
+            </span>
+        </li>
+    </ul>
+
+    <div class="wrap aboutUs switchCot">
+        <div class="about-content">
+            <div class="left">
+                <h1 class="fadeInLeft animated wow">{$site_detail['site_name']}</h1>
+            </div>
+        </div>
+
+        <div class="comcontul" >
+            <video controls="" src="http://www.acrel.cn/image/movie20171114.mp4" style="float:right; width: 600px; height: 350px; margin: 0 0 20px 20px;">
+                <source src="../image/movie20171114.mp4" type="video/mp4">
+                <source src="movie.ogg" type="video/ogg">
+                您的浏览器不支持Video标签。
+            </video>
+
+            <div style="padding: 10px; font-size: 22px;">{$main_detail['content']|raw}</div>
+        </div>
+
+        <ul class="patent-wrap">
+            <li class="rotateInDownRight animated wow">
+                <img src="/app/index/pc_view/image/patent1.png" alt="">
+                <b></b>
+                <p>{$site_detail['zhuan_li']}项专利</p>
+            </li>
+            <li class="rotateInDownLeft animated wow">
+                <img src="/app/index/pc_view/image/patent2.png" alt="">
+                <b></b>
+                <p>{$site_detail['fa_ming']}项发明专利</p>
+            </li>
+            <li class="rotateInDownRight animated wow">
+                <img src="/app/index/pc_view/image/patent3.png" alt="">
+                <b></b>
+                <p>{$site_detail['shi_yong_xin_xing']}项实用新型专利</p>
+            </li>
+            <li class="rotateInDownLeft animated wow">
+                <img src="/app/index/pc_view/image/patent4.png" alt="">
+                <b></b>
+                <p>{$site_detail['wai_guan']}外观专利</p>
+            </li>
+            <li class="rotateInDownRight animated wow">
+                <img src="/app/index/pc_view/image/patent5.png" alt="">
+                <b></b>
+                <p>{$site_detail['ji_suan_ji_ruan_zhu']}项计算机软著专利</p>
+            </li>
+        </ul>
+    </div>
+
+    <div class="credential-wrap switchCot">
+        <!--效果html开始-->
+        <div class="poster-main">
+            <div class="poster-btn poster-prev-btn"></div>
+            <ul class="poster-list">
+                {volist name="$main_detail['honor_list_json']" id="value"}
+                    <li class="poster-item">
+                        <img src="{$value['image']}">
+                    </li>
+                {/volist}
+            </ul>
+            <div class="poster-btn poster-next-btn"></div>
+        </div>
+        <ul class="wrap credentials">
+            {volist name="$main_detail['certificate_list_json']" id="value"}
+                <li>
+                    <img src="{$value['image']}" alt="证书"/>
+                </li>
+            {/volist}
+        </ul>
+    </div>
+
+    <!-- // 新增的HTML 第三个分类   新闻~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <ul class="news-container container switchCot" style="width: auto;">
+        {php}
+        $news_list = (new \app\common\Model\NewsModel())->where("first_news_class_id = 4")->order('id desc')->select();
+        foreach ($news_list as $key => $news) {
+        {/php}
+
+        <li style="box-shadow: none;" class="getchange">
+            <a href="/news_detail{$news['id']}.html">
+                <img src="{$news['image']}" alt="新闻图片" style="width: 314px;height: 200px;margin:18px;" />
+                <div>
+                <div style="width: 100%; margin: 20px 20px 0 20px;" >
+                    <a href="/news_detail{$news['id']}.html">
+                        <div class="title-wrap">
+                            <h4>{$news['news_name']}</h4>
+                        </div>
+                        <div class="title-wrap">
+                            <h5>{$news['update_time']}</h5>
+                        </div>
+                        <p style="padding: 5px 0 5px 0;">
+                            {$news['content']|text_length=200}
+                        </p>
+                    </a>
+                </div></div>
+            </a>
+        </li>
+        <!--
+        <li style="box-shadow: none;">
+            <a href="/news_detail{$news['id']}.html">
+                <img src="{$news['image']}" alt="新闻图片" />
+                <div style="width: 100%;">
+                    <a href="/news_detail{$news['id']}.html">
+                        <div class="title-wrap">
+                            <h4>{$news['news_name']}</h4>
+                            <span>{$news['update_time']}</span>
+                        </div>
+                        <p style="padding: 5px 0 10px 0;">
+                            {$news['content']|text_length=100}
+                        </p>
+                    </a>
+                </div>
+            </a>
+        </li>
+        -->
+        {php}
+        }
+        {/php}
+    </ul>
+    <!-- // 新增的HTML 第三个分类   新闻~ END -->
+</div>
+
+{php}
+$tab = input('tab');
+{/php}
+
+<script>
+    $(function () {
+        set_nav(1); //设置 导航
+    });
+
+    $(".poster-main").Carousel({
+        "width": 900,
+        "height": 383,
+        "posterWidth": 306,
+        "posterHeight": 403,
+        "scale": 0.85,
+        "speed": 500,
+        "autoPlay": true,
+        "delay": 2000,
+        "verticalAlign": "middle"
+    });
+
+    // 切换
+    /*
+    function switchTab(type, e) {
+        console.log(type)
+        let pre = e.target.previousElementSibling;
+        let next = e.target.nextElementSibling;
+
+        let aboutUs = document.getElementsByClassName('aboutUs')[0];
+        let credential = document.getElementsByClassName('credential-wrap')[0];
+        console.log(aboutUs)
+        if (pre != null) {
+            e.target.previousElementSibling.className = ''
+        } else {
+            e.target.nextElementSibling.className = ''
+        }
+        switch (type) {
+            case 1:
+                aboutUs.style = 'display:block';
+                credential.style = 'display:none'
+                break;
+            case 2:
+                aboutUs.style = 'display:none';
+                credential.style = 'display:block';
+                break
+        }
+
+        e.target.className = 'aboutPlateCheck';
+    }
+    */
+
+    // 此次新加！！！！！！！！！！！！！原文件中有个相同名字的方法， 那个有点low 这是优化后的版本 覆盖就好
+    function switchTab(type, e) {
+        let pre = e.target.previousElementSibling;
+        let next = e.target.nextElementSibling;
+        let nodeTop = document.getElementsByClassName('switchLi'); // 所有顶部节点
+        let nodeBody = document.getElementsByClassName('switchCot'); // 所有内容节点
+        let presentText = document.getElementsByClassName('selectText')[0]; //当前nav文字
+
+        let newTopList = [];
+
+        [...nodeTop].map((item, index) => {
+            if (type == index) {
+                nodeBody[index].style = 'display:block'
+                item.className = 'aboutPlateCheck switchLi'
+            } else {
+                nodeBody[index].style = 'display:none'
+                item.className = 'switchLi'
+            }
+            newTopList.push(item);
+        })
+        switch(type){
+            case 0:
+                //presentText.innerHTML = '公司介绍'
+                $('#intro_name').html('公司介绍');
+                break;
+            case 1:
+                //presentText.innerHTML = '企业资质'
+                $('#intro_name').html('企业资质');
+                break;
+            case 2:
+                //presentText.innerHTML = '新闻中心'
+                $('#intro_name').html('新闻中心');
+                break;
+        }
+    }
+    // 新增JS END
+
+    // 2020年3月18日 14:21:13 新增
+    window.onload = function() {
+        let params = 0;
+        if (window.location.search.split('=')[1] == undefined) {
+            params = 0;
+        } else {
+            params = window.location.search.split('=')[1];
+        }
+
+        let nodeTop = document.getElementsByClassName('switchLi'); // 所有顶部节点
+        let nodeBody = document.getElementsByClassName('switchCot'); // 所有内容节点
+
+        if (params > 0) {
+            nodeBody[0].style = 'display:none';
+            nodeTop[0].className = 'switchLi';
+        }
+
+        nodeTop[params - 0].className = 'aboutPlateCheck switchLi';
+        nodeBody[params - 0].style = 'display:block';
+
+        console.log(params)
+    }
+</script>

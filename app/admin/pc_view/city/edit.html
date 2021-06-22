@@ -1,0 +1,43 @@
+<!--
+-+--------------------------------------------------
+-| PC 端
+-| 后台管理 > 省 / 市 / 县 > 添加、修改
+-+--------------------------------------------------
+-->
+<div id="app" v-loading="is_loading_html" v-cloak>
+    <el-form class="padding_20" label-width="100px" @submit.native.prevent>
+        <el-form-item label="所属省市">
+
+        </el-form-item>
+        <el-form-item label="名称" :required="true">
+            <el-input placeholder="请输入名称" maxlength="200" show-word-limit="true" clearable="true" v-model="main_detail.city_name"></el-input>
+        </el-form-item>
+        <el-form-item label="行政编码" :required="true">
+            <el-input placeholder="请输入行政编码" maxlength="200" show-word-limit="true" clearable="true" v-model="main_detail.city_code"></el-input>
+        </el-form-item>
+        <el-form-item label="排序" :required="true">
+            <el-input-number placeholder="排序值" precision="0" :min="1" v-model="main_detail.sort"></el-input-number>
+        </el-form-item>
+        <el-form-item>
+            <el-switch active-text="审核" v-model="main_detail.is_pass"></el-switch>
+        </el-form-item>
+
+        <div class="pc_bottom_button_bar">
+            {:close_button()}
+            {:admin_save_data_button()}
+        </div>
+    </el-form>
+</div>
+
+<script src="/static/renhe-ui/data/city_data.js"></script>
+<script>
+    let vue_param = {
+        data() {
+            return {
+                main_detail: city_data.get_any_detail('{$id}')
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>

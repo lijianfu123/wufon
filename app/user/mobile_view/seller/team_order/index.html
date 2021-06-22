@@ -1,0 +1,93 @@
+<!--
+-+--------------------------------------------------
+-| 手机端
+-| 会员中心 > 销售 > 团队订单 > 列表
+-+--------------------------------------------------
+-->
+<div id="app">
+    <van-nav-bar ref="nav_bar" title="团队订单" left-arrow @click-left="back()"></van-nav-bar>
+
+    <van-list>
+        <van-cell>
+            <template slot="title">
+                <van-row>
+                    <van-col span="3">
+                        <van-image width="20" height="20" src="https://img.yzcdn.cn/vant/cat.jpeg" round></van-image>
+                    </van-col>
+                    <van-col span="21">
+                        滴水3
+                    </van-col>
+                </van-row>
+            </template>
+            <template slot="label">
+                <van-row>
+                    <van-col span="3"></van-col>
+                    <van-col span="13">
+                        单号：2019081608123572
+                    </van-col>
+                    <van-col span="8">
+                        金额：￥100.00
+                    </van-col>
+                </van-row>
+            </template>
+        </van-cell>
+        <van-cell>
+            <template slot="title">
+                <van-row>
+                    <van-col span="3">
+                        <van-image width="20" height="20" src="https://img.yzcdn.cn/vant/cat.jpeg" round></van-image>
+                    </van-col>
+                    <van-col span="21">
+                        滴水3
+                    </van-col>
+                </van-row>
+            </template>
+            <template slot="label">
+                <van-row>
+                    <van-col span="3"></van-col>
+                    <van-col span="13">
+                        单号：2019081608123572
+                    </van-col>
+                    <van-col span="8">
+                        金额：￥100.00
+                    </van-col>
+                </van-row>
+            </template>
+        </van-cell>
+        <van-cell>
+            <template slot="title">
+                <van-row>
+                    <van-col span="3">
+                        <van-image width="20" height="20" src="https://img.yzcdn.cn/vant/cat.jpeg" round></van-image>
+                    </van-col>
+                    <van-col span="21">
+                        滴水3
+                    </van-col>
+                </van-row>
+            </template>
+            <template slot="label">
+                <van-row>
+                    <van-col span="3"></van-col>
+                    <van-col span="13">
+                        单号：2019081608123572
+                    </van-col>
+                    <van-col span="8">
+                        金额：￥100.00
+                    </van-col>
+                </van-row>
+            </template>
+        </van-cell>
+    </van-list>
+</div>
+
+<script>
+    let vue_param = {
+        data() {
+            return {
+
+            }
+        }
+    };
+
+    let vue = new base_vue(vue_param);
+</script>
